@@ -20,7 +20,8 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
     private Cliente Cliente2 = new Cliente("6632458","Jose Ramirez","-",
                                    6632458,"Capiata City",
                                    961951348);
-    
+
+    //hola
     private boolean validador = false; 
     private Cliente cliente_final; 
     
