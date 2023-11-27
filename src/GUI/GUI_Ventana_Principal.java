@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 package GUI;
+import Clases.Cliente;
+import Clases.Cuenta;
+import Clases.Individuo;
+import Clases.Empresa; 
 
 /**
  *
@@ -13,6 +17,15 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
     /**
      * Creates new form NewApplication
      */
+    private Cliente[] clientes = new Cliente[2];
+    private GUI_Estado_Cuenta MenuEstadoCuenta = new GUI_Estado_Cuenta();
+    private GUI_Pago_Servicios MenuPagoServicios = new GUI_Pago_Servicios();
+    private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
+    private GUI_Transferencias MenuTransferencias = new GUI_Transferencias(); 
+ 
+    private int cliente_final;
+    private int cuenta_final; 
+    
     public GUI_Ventana_Principal() {
         initComponents();
     }
@@ -73,6 +86,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Usuario: ---------");
+        jLabel1.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Cuenta:-----------");
@@ -163,7 +177,23 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
         menu_Tarjetas.setVisible(true);
         menu_Tarjetas.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    
+    public void set_Usuario_Saldo()
+    {
+        jLabel1.setText("Usuario: "+clientes[cliente_final].get_nombre());
+        Cuenta[] cuentas_usuario = clientes[cliente_final].get_Cuenta();
+        jLabel2.setText("Saldo: "+ cuentas_usuario[cuenta_final].getSaldo());
+    }
+    
+    public void set_Datos(Cliente[] clientes, int cliente_final, int cuenta_final)
+    {
+        this.clientes = clientes;
+        this.cliente_final = cliente_final;
+        this.cuenta_final = cuenta_final;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
