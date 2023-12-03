@@ -12,19 +12,19 @@ import Clases.Empresa;
  *
  * @author EJFR0
  */
-public class GUI_Ventana_Principal extends javax.swing.JFrame {
+public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfaz{
 
     /**
      * Creates new form NewApplication
      */
-    private Cliente[] clientes = new Cliente[2];
+    private Cliente[] clientes;
     private GUI_Estado_Cuenta MenuEstadoCuenta = new GUI_Estado_Cuenta();
     private GUI_Pago_Servicios MenuPagoServicios = new GUI_Pago_Servicios();
     private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
     private GUI_Transferencias MenuTransferencias = new GUI_Transferencias(); 
  
-    private int cliente_final;
-    private int cuenta_final; 
+    private Cliente cliente_final;
+    private Cuenta cuenta_final; 
     
     public GUI_Ventana_Principal() {
         initComponents();
@@ -47,7 +47,6 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
-        aboutMenuItem = new javax.swing.JMenuItem();
         MenuCerradoSesion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,15 +92,15 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
 
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("Documentacion");
-        helpMenu.add(aboutMenuItem);
-
         menuBar.add(helpMenu);
 
         MenuCerradoSesion.setMnemonic('h');
         MenuCerradoSesion.setText("Cerrar sesion");
+        MenuCerradoSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuCerradoSesionMouseClicked(evt);
+            }
+        });
         menuBar.add(MenuCerradoSesion);
 
         setJMenuBar(menuBar);
@@ -177,19 +176,31 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
         menu_Tarjetas.setVisible(true);
         menu_Tarjetas.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void MenuCerradoSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuCerradoSesionMouseClicked
+        // TODO add your handling code here:
+        
+         GUI_Inicio_Sesion Menu_Inicio = new GUI_Inicio_Sesion();
+         Menu_Inicio.set_Datos(clientes,cliente_final,cuenta_final);
+         Menu_Inicio.setVisible(true);
+         cerrar();
+    }//GEN-LAST:event_MenuCerradoSesionMouseClicked
     
     public void set_Usuario_Saldo()
     {
-        jLabel1.setText("Usuario: "+clientes[cliente_final].get_nombre());
-        Cuenta[] cuentas_usuario = clientes[cliente_final].get_Cuenta();
-        jLabel2.setText("Saldo: "+ cuentas_usuario[cuenta_final].getSaldo());
+        jLabel1.setText("Usuario: " + cliente_final.get_nombre());
+        jLabel2.setText("Saldo: "+ cuenta_final.getSaldo());
     }
     
-    public void set_Datos(Cliente[] clientes, int cliente_final, int cuenta_final)
+    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
     {
         this.clientes = clientes;
         this.cliente_final = cliente_final;
         this.cuenta_final = cuenta_final;
+    }
+    
+    public void cerrar() {
+        dispose();
     }
     
     
@@ -234,7 +245,6 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuCerradoSesion;
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -13,11 +13,10 @@ public interface Interfaz {
     /**
      * Método para cerrar la ventana cuando se hace clic en el botón "Salir".
      */
-    public void Cerrar();
+    public void cerrar();
 
     /**
      * Método para procesar y manejar datos.
      */
-    public void ExtraerDatos();
 
 }

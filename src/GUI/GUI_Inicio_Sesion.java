@@ -3,30 +3,67 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 package GUI;
-import Clases.Cliente; 
+import Clases.Cliente;
+import Clases.Cuenta;
+import Clases.Individuo;
+import Clases.Empresa; 
 
 /**
+ * La clase GUI_Inicio_Sesion representa la interfaz gráfica para el proceso de inicio de sesión de clientes.
+ * Permite a los usuarios ingresar su número de documento, seleccionar una cuenta y proporcionar un PIN de acceso.
+ * La validación de los datos ingresados se realiza para permitir el acceso a la aplicación.
+ * 
+ * <p>La clase implementa la interfaz {@link Interfaz} y utiliza la biblioteca Swing para la construcción de la interfaz gráfica.</p>
  *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code clientes} - Arreglo de objetos {@link Cliente} que almacena los clientes de la aplicación.</li>
+ *   <li>{@code menu} - Instancia de la clase {@link GUI_Ventana_Principal} que representa el menú principal.</li>
+ *   <li>{@code validador} - Variable booleana que indica si la validación de inicio de sesión fue exitosa.</li>
+ *   <li>{@code cliente_final} - Objeto {@link Cliente} que representa al cliente que ha iniciado sesión.</li>
+ *   <li>{@code cuenta_final} - Objeto {@link Cuenta} que representa la cuenta asociada al inicio de sesión.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code GUI_Inicio_Sesion()} - Constructor que inicializa la interfaz y llama a {@code crear_Datos()}.</li>
+ *   <li>{@code initComponents()} - Método generado automáticamente que inicializa los componentes de la interfaz.</li>
+ *   <li>{@code jButton1ActionPerformed(ActionEvent evt)} - Manejador de eventos para el botón "Aceptar".</li>
+ *   <li>{@code jTextField2ActionPerformed(ActionEvent evt)} - Manejador de eventos para el campo de texto "Cuenta".</li>
+ *   <li>{@code jButton2ActionPerformed(ActionEvent evt)} - Manejador de eventos para el botón "Cancelar".</li>
+ *   <li>{@code helpMenuMouseClicked(MouseEvent evt)} - Manejador de eventos para hacer clic en el menú de ayuda.</li>
+ *   <li>{@code cerrar()} - Método para cerrar la interfaz.</li>
+ *   <li>{@code extraerDatos()} - Método para procesar y validar los datos ingresados durante el inicio de sesión.</li>
+ *   <li>{@code crear_Datos()} - Método para inicializar datos de prueba.</li>
+ *   <li>{@code set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)} - Método para establecer datos en la interfaz.</li>
+ * </ul>
+ *
+ * <p>Esta aplicación sigue el patrón de diseño Modelo-Vista-Controlador (MVC), donde esta clase sirve como parte de la vista.</p>
+ * 
  * @author EJFR0
+ * @version 1.0
+ * @see Interfaz
+ * @see GUI_Ventana_Principal
+ * @see GUI_Ayuda
  */
-public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
+public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
 
     /**
      * Creates new form NewApplication
      */
-    private Cliente Cliente1 = new Cliente("5438724","Elias Figueredo","-",
-                                   5438724,"Reverendo Luis Paiva",
-                                   971543023);
-    private Cliente Cliente2 = new Cliente("6632458","Jose Ramirez","-",
-                                   6632458,"Capiata City",
-                                   961951348);
+    private Cliente[] clientes = new Cliente[2];
+    private GUI_Ventana_Principal menu = new GUI_Ventana_Principal(); 
 
-    //hola
     private boolean validador = false; 
-    private Cliente cliente_final; 
-    
-    
-    public GUI_Incio_Sesion() {
+    private Cliente cliente_final;
+    private Cuenta cuenta_final; 
+   
+    /**
+     * Constructor para la clase GUI_Inicio_Sesion.
+     * Crea instancias de la interfaz gráfica y llama al método crear_Datos para inicializar datos.
+     */
+    public GUI_Inicio_Sesion() {
+        this.crear_Datos();
         initComponents();
     }
 
@@ -48,9 +85,9 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +101,11 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel1.setText("Incio de sesion");
@@ -88,13 +130,16 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText(" ");
+
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Documentacion");
-        helpMenu.add(contentsMenuItem);
-
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
+            }
+        });
         menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
@@ -121,10 +166,11 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField1))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField2)
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,7 +190,9 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -157,12 +205,13 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ExtraerDatos();
+        extraerDatos();
         if(validador)
-        {
-            GUI_Ventana_Principal Menu = new GUI_Ventana_Principal();
-            Menu.setVisible(true);
-            Cerrar();
+        {   
+            menu.set_Datos(clientes,cliente_final,cuenta_final);
+            menu.set_Usuario_Saldo();
+            menu.setVisible(true);
+            cerrar();
         }
        
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -170,8 +219,20 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
+        // TODO add your handling code here:
+        GUI_Ayuda Menu_Ayuda = new GUI_Ayuda(); 
+        Menu_Ayuda.setVisible(true);
+        Menu_Ayuda.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_helpMenuMouseClicked
     
-    public void Cerrar()
+    public void cerrar()
     {
         dispose();
     }
@@ -179,28 +240,70 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
     /**
      * Método para procesar y manejar datos.
      */
-    public void ExtraerDatos()
+    public void extraerDatos()
     {
         String ci_ruc = jTextField1.getText();
         String cuenta = jTextField2.getText();
         String pin = jPasswordField1.getText();
+        int pin_nmr;
+        int cuenta_nmr ;
         
-        //Excepcion; 
-        
-        int numeroInt = Integer.parseInt(pin);
-        
-        if(Cliente1.get_ci_ruc().equals(ci_ruc) && numeroInt == Cliente1.get_pin() )
+        try
         {
-            validador = true;
-            cliente_final = Cliente1;
+            pin_nmr = Integer.parseInt(pin);
+            cuenta_nmr = Integer.parseInt(cuenta);
+            
+            for (int i = 0; i < 2; i++) {
+                if (clientes[i].get_ci_ruc().equals(ci_ruc) && clientes[i].get_pin() == pin_nmr) {
+                    for (Cuenta cuentas : clientes[i].get_Cuenta()) {
+
+                        if (cuentas.getID() == cuenta_nmr) {
+                            validador = true;
+                            cliente_final = clientes[i];
+                            cuenta_final = cuentas;
+                            return;
+
+                        }
+                    }
+
+                }
+            }
+
+            jLabel5.setText("Datos incorrectos");
+        }catch(Exception e)
+        {
+            jLabel5.setText("Formato de Pin o cuenta invalido");
         }
-                
+    }
+    
+    public void crear_Datos()
+    {   
+        Cuenta cuenta1 = new Cuenta(1, 1234, 1000, 5678);
+        Cuenta cuenta2 = new Cuenta(2, 4321, 500, 9876);
+        Cuenta cuenta3 = new Cuenta(3, 5678, 1500, 8765);
+        
+        Cuenta[] cuentaA = {cuenta1, cuenta2};
+        Cuenta[] cuentaB = {cuenta3};
+        
+        this.clientes[0] = new Individuo("5438724","-",5438724,"Reverendo Luis Paiva",971543023,"Elias Figueredo", cuentaA);
+        this.clientes[1] = new Empresa("6632458","-",6632458,"Capiata City",961951348,"Capiateña SA",cuentaB);
+                            
+    }
+    
+    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
+    {
+        this.clientes = clientes;
+        this.cliente_final = cliente_final;
+        this.cuenta_final = cuenta_final;
     }
     
     
     
     /**
-     * @param args the command line arguments
+     * Método principal para ejecutar la aplicación.
+     * Crea una instancia de GUI_Inicio_Sesion y la hace visible.
+     * 
+     * @param args Los argumentos de la línea de comandos (no se utilizan en este caso).
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -216,14 +319,18 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_Incio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Inicio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_Incio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Inicio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_Incio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Inicio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_Incio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Inicio_Sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -232,13 +339,14 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Incio_Sesion().setVisible(true);
+                 GUI_Inicio_Sesion menuInicio = new GUI_Inicio_Sesion();
+                 menuInicio.setVisible(true);
+               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -246,6 +354,7 @@ public class GUI_Incio_Sesion extends javax.swing.JFrame implements Interfaz{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
