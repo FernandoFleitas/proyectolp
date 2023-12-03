@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Clases;
+
+import java.util.ArrayList;
+
 /**
  * La clase Cuenta representa una cuenta asociada a un cliente en el sistema de banca en línea.
  * 
@@ -41,7 +44,9 @@ public class Cuenta {
     /** Saldo actual de la cuenta. */
     private int saldo;
     /** Número de tarjeta de débito asociada a la cuenta. */
-    private int tarjeta_debito; 
+    private int tarjeta_debito;
+    
+    private ArrayList<Comprobante> Movimientos;
 
     /**
      * Constructor que inicializa una cuenta con la información proporcionada.
@@ -51,10 +56,12 @@ public class Cuenta {
      * @param tarjeta_debito Número de tarjeta de débito asociada a la cuenta.
      */
     public Cuenta(int ID, int pin_transaccion, int saldo, int tarjeta_debito) {
+        
         this.ID = ID;
         this.pin_transaccion = pin_transaccion;
         this.saldo = saldo;
         this.tarjeta_debito = tarjeta_debito;
+        this.Movimientos = new ArrayList<Comprobante>();
     }
 
     /**
@@ -119,6 +126,10 @@ public class Cuenta {
      */
     public void setTarjetaDebito(int tarjeta_debito) {
         this.tarjeta_debito = tarjeta_debito;
+    }
+    
+    public ArrayList<Comprobante> getMovimientos(){
+        return Movimientos;
     }
 }
 

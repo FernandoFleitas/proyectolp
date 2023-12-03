@@ -154,6 +154,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         menu_Estado.setVisible(true);
         menu_Estado.set_Datos(clientes,cliente_final,cuenta_final);
         menu_Estado.set_Usuario_Cuenta_Tarjeta_Saldo();
+        menu_Estado.agregarMovimientos();
         menu_Estado.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
     }//GEN-LAST:event_jButton1ActionPerformed

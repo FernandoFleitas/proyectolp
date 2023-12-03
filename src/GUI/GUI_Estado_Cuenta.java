@@ -5,16 +5,47 @@
 package GUI;
 
 import Clases.Cliente;
+import Clases.Comprobante;
 import Clases.Cuenta;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
- * Interfaz gráfica para mostrar el estado de cuenta de un cliente.
+ * La clase GUI_Estado_Cuenta representa la interfaz gráfica para mostrar el estado de cuenta de un cliente.
+ * Permite visualizar información sobre el usuario, cuenta, tarjeta, saldo y movimientos.
+ * 
+ * <p>La clase utiliza la biblioteca Swing para la construcción de la interfaz gráfica y trabaja con objetos de las clases
+ * {@link Cliente}, {@link Cuenta} y {@link Comprobante} para obtener y mostrar los datos necesarios.</p>
+ *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code clientes} - Array de objetos {@link Cliente} que almacena los clientes de la aplicación.</li>
+ *   <li>{@code cliente_final} - Objeto {@link Cliente} que representa al cliente actual.</li>
+ *   <li>{@code cuenta_final} - Objeto {@link Cuenta} que representa la cuenta asociada al cliente.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code GUI_Estado_Cuenta()} - Constructor que inicializa la interfaz.</li>
+ *   <li>{@code set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)} - Método para establecer los datos del cliente actual.</li>
+ *   <li>{@code set_Usuario_Cuenta_Tarjeta_Saldo()} - Método para establecer y mostrar información sobre el usuario, cuenta, tarjeta y saldo.</li>
+ *   <li>{@code agregarMovimientos()} - Método para agregar movimientos a la tabla de la interfaz.</li>
+ * </ul>
+ *
+ * <p>Esta aplicación sigue el patrón de diseño Modelo-Vista-Controlador (MVC), donde esta clase sirve como parte de la vista.</p>
+ * 
+ * @author ferfe
+ * @version 1.0
+ * @see Cliente
+ * @see Cuenta
+ * @see Comprobante
  */
 public class GUI_Estado_Cuenta extends javax.swing.JFrame {
 
     private Cliente[] clientes;
     private Cliente cliente_final;
     private Cuenta cuenta_final;
+    
 
     /**
      * Constructor de la clase GUI_Estado_Cuenta.
@@ -35,6 +66,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
         this.clientes = clientes;
         this.cliente_final = cliente_final;
         this.cuenta_final = cuenta_final;
+        
     }
     /**
      * Método para establecer y mostrar información sobre el usuario, cuenta, tarjeta y saldo.
@@ -44,6 +76,16 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
         jLabel2.setText("Cuenta: "+ cuenta_final.getID());
         jLabel4.setText("Tarjeta Débito N°: "+ cuenta_final.getTarjetaDebito());
         jLabel3.setText("Saldo: "+ cuenta_final.getSaldo() + " Gs");
+    }
+    
+    public void agregarMovimientos() {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+        
+        for (Comprobante comprobante : cuenta_final.getMovimientos()) {
+            Object[] row = {comprobante.get_descripcion(), comprobante.get_monto()};
+            model.addRow(row);
+        }
     }
     /**
      * Este método es llamado desde el constructor para inicializar la forma.
@@ -78,10 +120,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Conceptos", "Monto"
