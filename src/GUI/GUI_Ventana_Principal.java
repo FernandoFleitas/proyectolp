@@ -152,6 +152,8 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         // TODO add your handling code here:
         GUI_Estado_Cuenta menu_Estado = new GUI_Estado_Cuenta();
         menu_Estado.setVisible(true);
+        menu_Estado.set_Datos(clientes,cliente_final,cuenta_final);
+        menu_Estado.set_Usuario_Cuenta_Tarjeta_Saldo();
         menu_Estado.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -189,7 +191,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     public void set_Usuario_Saldo()
     {
         jLabel1.setText("Usuario: " + cliente_final.get_nombre());
-        jLabel2.setText("Saldo: "+ cuenta_final.getSaldo());
+        jLabel2.setText("Saldo: "+ cuenta_final.getSaldo() + " Gs");
     }
     
     public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
