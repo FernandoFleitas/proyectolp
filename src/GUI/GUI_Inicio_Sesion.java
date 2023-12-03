@@ -108,10 +108,10 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jLabel1.setText("Incio de sesion");
+        jLabel1.setText("Inicio de sesión");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jLabel2.setText("n° de documento:");
+        jLabel2.setText("N° de documento:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel3.setText("Cuenta:");
@@ -158,7 +158,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -171,7 +171,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
                                     .addComponent(jTextField2)
                                     .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
