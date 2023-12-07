@@ -18,7 +18,7 @@ import Clases.Empresa;
  * <p><strong>Atributos:</strong></p>
  * <ul>
  *   <li>{@code clientes} - Arreglo de objetos {@link Cliente} que almacena los clientes de la aplicación.</li>
- *   <li>{@code menu} - Instancia de la clase {@link GUI_Ventana_Principal} que representa el menú principal.</li>
+ *   <li>{@code menu_principal} - Instancia de la clase {@link GUI_Ventana_Principal} que representa el menú principal.</li>
  *   <li>{@code validador} - Variable booleana que indica si la validación de inicio de sesión fue exitosa.</li>
  *   <li>{@code cliente_final} - Objeto {@link Cliente} que representa al cliente que ha iniciado sesión.</li>
  *   <li>{@code cuenta_final} - Objeto {@link Cuenta} que representa la cuenta asociada al inicio de sesión.</li>
@@ -33,7 +33,7 @@ import Clases.Empresa;
  *   <li>{@code jButton2ActionPerformed(ActionEvent evt)} - Manejador de eventos para el botón "Cancelar".</li>
  *   <li>{@code helpMenuMouseClicked(MouseEvent evt)} - Manejador de eventos para hacer clic en el menú de ayuda.</li>
  *   <li>{@code cerrar()} - Método para cerrar la interfaz.</li>
- *   <li>{@code extraerDatos()} - Método para procesar y validar los datos ingresados durante el inicio de sesión.</li>
+ *   <li>{@code validarPin()} - Método para procesar y validar los datos ingresados durante el inicio de sesión.</li>
  *   <li>{@code crear_Datos()} - Método para inicializar datos de prueba.</li>
  *   <li>{@code set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)} - Método para establecer datos en la interfaz.</li>
  * </ul>
@@ -52,7 +52,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
      * Creates new form NewApplication
      */
     private Cliente[] clientes = new Cliente[2];
-    private GUI_Ventana_Principal menu = new GUI_Ventana_Principal(); 
+    private GUI_Ventana_Principal menu_principal = new GUI_Ventana_Principal(); 
 
     private boolean validador = false; 
     private Cliente cliente_final;
@@ -76,8 +76,8 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BotonAceptar = new javax.swing.JButton();
+        BotonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -91,19 +91,19 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BotonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        BotonAceptar.setText("Aceptar");
+        BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BotonAceptarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BotonCancelar.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        BotonCancelar.setText("Cancelar");
+        BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BotonCancelarActionPerformed(evt);
             }
         });
 
@@ -157,9 +157,9 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(BotonAceptar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(BotonCancelar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,8 +194,8 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(BotonAceptar)
+                    .addComponent(BotonCancelar))
                 .addGap(28, 28, 28))
         );
 
@@ -203,27 +203,27 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
         // TODO add your handling code here:
-        extraerDatos();
+        validarPin();
         if(validador)
         {   
-            menu.set_Datos(clientes,cliente_final,cuenta_final);
-            menu.set_Usuario_Saldo();
-            menu.setVisible(true);
+            menu_principal.set_Datos(clientes,cliente_final,cuenta_final);
+            menu_principal.set_Usuario_Saldo();
+            menu_principal.setVisible(true);
             cerrar();
         }
        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BotonAceptarActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BotonCancelarActionPerformed
 
     private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
         // TODO add your handling code here:
@@ -240,7 +240,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     /**
      * Método para procesar y manejar datos.
      */
-    public void extraerDatos()
+    public void validarPin()
     {
         String ci_ruc = jTextField1.getText();
         String cuenta = jTextField2.getText();
@@ -347,9 +347,9 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAceptar;
+    private javax.swing.JButton BotonCancelar;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
