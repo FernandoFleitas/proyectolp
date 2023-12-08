@@ -118,7 +118,6 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            System.out.println("Holaaa");
             int pin_ingresado = Integer.parseInt(jPasswordField1.getText());
             if(pin_ingresado == cuenta_final.getPinTransaccion()){
                 isvalido = true;
