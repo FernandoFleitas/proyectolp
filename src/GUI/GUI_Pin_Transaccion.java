@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import Clases.Cuenta;
 /**
  *
- * @author EJFR0
+ * @author josef
  */
 public class GUI_Pin_Transaccion extends javax.swing.JFrame {
 
+    private boolean isvalido = false;
+    private Cuenta cuenta_final;
     /**
      * Creates new form Validar_Pin_Transaccion
      */
@@ -17,6 +19,15 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public boolean get_isvalido(){
+        return isvalido;
+    }
+    
+    public void set_Datos(Cuenta cuenta_final){
+        this.cuenta_final = cuenta_final;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,12 +49,22 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
         jLabel1.setText("Validar Pin");
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel2.setText("PIN:");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
@@ -89,6 +110,26 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            System.out.println("Holaaa");
+            int pin_ingresado = Integer.parseInt(jPasswordField1.getText());
+            if(pin_ingresado == cuenta_final.getPinTransaccion()){
+                isvalido = true;
+            }
+            else jPasswordField1.setText("");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            jPasswordField1.setText("");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

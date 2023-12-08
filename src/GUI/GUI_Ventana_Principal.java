@@ -162,6 +162,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         GUI_Transferencias menu_Trans = new GUI_Transferencias();
+        menu_Trans.set_Datos(clientes, cliente_final, cuenta_final);
         menu_Trans.setVisible(true);
         menu_Trans.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed

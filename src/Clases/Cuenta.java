@@ -1,4 +1,4 @@
-/*
+   /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -130,6 +130,10 @@ public class Cuenta {
     
     public ArrayList<Comprobante> getMovimientos(){
         return Movimientos;
+    }
+    
+    public void setMovimientos(Comprobante comprobante){
+        Movimientos.add(comprobante);
     }
 }
 

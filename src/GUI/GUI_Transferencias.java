@@ -3,13 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import Clases.Cliente;
+import Clases.Cuenta;
+import Clases.Comprobante;
+import java.awt.Dialog;
 
 /**
  *
- * @author EJFR0
+ * @author josef
  */
 public class GUI_Transferencias extends javax.swing.JFrame {
-
+    
+    private Cliente[] clientes;
+    private GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
+    private Cliente cliente_final;
+    private Cuenta cuenta_final; 
+    private Cliente cliente_destino;
+    private Cuenta cuenta_destino;
+    private int monto;
+    private boolean validador = false;
+    
+    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
+    {
+        this.clientes = clientes;
+        this.cliente_final = cliente_final;
+        this.cuenta_final = cuenta_final;
+    }
+    
     /**
      * Creates new form Transferencias
      */
@@ -170,13 +190,79 @@ public class GUI_Transferencias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    //Boton de Aceptar
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
-        menu_validar.setVisible(true);
-        menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        validar_inputs();
+        if(validador){
+            menu_validar.set_Datos(cuenta_final);
+            menu_validar.setVisible(true);
+            menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            if(menu_validar.get_isvalido()){
+                transferir();
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private void transferir(){
+        if(cuenta_final.getSaldo() >= cuenta_destino.getSaldo()){
+            cuenta_final.setSaldo(cuenta_final.getSaldo() - monto);
+            cuenta_destino.setSaldo(cuenta_destino.getSaldo() + monto);
+            
+            //Creamos el comprobante
+            Comprobante comprobante_final = new Comprobante();
+            comprobante_final.set_monto(monto);
+            comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
+            comprobante_final.set_descripcion(cliente_final.get_nombre());
+            
+            //Agrega el comprobante en el historial de la cuenta
+            cuenta_final.setMovimientos(comprobante_final);
+        }
+    }
+    
+    private void validar_inputs(){
+        try
+        {
+            //Recopilamos los datos para validarlos
+            int banco = jComboBox2.getSelectedIndex();
+            String nombre = jTextField4.getText();
+            String ci_ruc = jTextField3.getText().replaceAll(" ","");
+            int monto = Integer.parseInt(jTextField2.getText().replaceAll(" ", ""));
+            int cuenta_nmr = Integer.parseInt(jTextField1.getText().replaceAll(" ",""));
+            
+            //Banco distinto a Continental
+            if(banco != 0)return;
+            if(monto<0){
+                jTextField2.setText("");
+                return;
+            }
+            
+            for (int i = 0; i < clientes.length ; i++) {
+                if (clientes[i].get_ci_ruc().equals(ci_ruc)) {
+                    for (Cuenta cuentas : clientes[i].get_Cuenta()) {
+                        //Si el nombre es correcto
+                        if (cuentas.getID() == cuenta_nmr && clientes[i].get_nombre().toLowerCase().contains(nombre.toLowerCase())){
+                                validador = true;
+                                cuenta_destino = cuentas;
+                                cliente_destino = clientes[i];
+                                return;
+                            
+                        }
+                    }
+                    jTextField4.setText("");
+                    jTextField1.setText("");
+                    return;
+                }
+            }
+            jTextField3.setText("");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            jTextField2.setText("");
+            jTextField1.setText("");
+        }
+    }
+    
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
