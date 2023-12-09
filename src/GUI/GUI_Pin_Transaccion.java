@@ -12,10 +12,11 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
 
     private boolean isvalido = false;
     private Cuenta cuenta_final;
+    private GUI_Transferencias menu_transferencias;
     /**
      * Creates new form Validar_Pin_Transaccion
      */
-    public GUI_Pin_Transaccion() {
+    public GUI_Pin_Transaccion(){
         initComponents();
     }
 
@@ -24,8 +25,9 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
         return isvalido;
     }
     
-    public void set_Datos(Cuenta cuenta_final){
+    public void set_Datos(Cuenta cuenta_final, GUI_Transferencias menu_transferencias){
         this.cuenta_final = cuenta_final;
+        this.menu_transferencias = menu_transferencias;
     }
     
     /**
@@ -68,6 +70,11 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,6 +128,9 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
             int pin_ingresado = Integer.parseInt(jPasswordField1.getText());
             if(pin_ingresado == cuenta_final.getPinTransaccion()){
                 isvalido = true;
+                menu_transferencias.transferir();
+                dispose();
+                menu_transferencias.cerrar();
             }
             else jPasswordField1.setText("");
         }catch(Exception e)
@@ -128,7 +138,14 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
             e.printStackTrace();
             jPasswordField1.setText("");
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();     
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

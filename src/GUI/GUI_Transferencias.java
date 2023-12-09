@@ -12,10 +12,11 @@ import java.awt.Dialog;
  *
  * @author josef
  */
-public class GUI_Transferencias extends javax.swing.JFrame {
+public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
     
     private Cliente[] clientes;
-    private GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
+    private GUI_Pin_Transaccion menu_validar;
+    private GUI_Ventana_Principal menu_principal;
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
     private Cliente cliente_destino;
@@ -23,11 +24,12 @@ public class GUI_Transferencias extends javax.swing.JFrame {
     private int monto;
     private boolean validador = false;
     
-    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
+    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final, GUI_Ventana_Principal menu_principal)
     {
         this.clientes = clientes;
         this.cliente_final = cliente_final;
         this.cuenta_final = cuenta_final;
+        this.menu_principal = menu_principal;
     }
     
     /**
@@ -75,6 +77,11 @@ public class GUI_Transferencias extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Transferencias");
@@ -192,20 +199,22 @@ public class GUI_Transferencias extends javax.swing.JFrame {
 
     //Boton de Aceptar
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         validar_inputs();
         if(validador){
-            menu_validar.set_Datos(cuenta_final);
+            menu_validar = new GUI_Pin_Transaccion();
+            menu_validar.set_Datos(cuenta_final,this);
             menu_validar.setVisible(true);
             menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            if(menu_validar.get_isvalido()){
-                transferir();
-            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void transferir(){
-        if(cuenta_final.getSaldo() >= cuenta_destino.getSaldo()){
+    public void cerrar(){
+        menu_principal.set_Usuario_Saldo();
+        dispose();
+    }
+    
+    public void transferir(){
+        if(cuenta_final.getSaldo() >= monto){
             cuenta_final.setSaldo(cuenta_final.getSaldo() - monto);
             cuenta_destino.setSaldo(cuenta_destino.getSaldo() + monto);
             
@@ -213,10 +222,17 @@ public class GUI_Transferencias extends javax.swing.JFrame {
             Comprobante comprobante_final = new Comprobante();
             comprobante_final.set_monto(monto);
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
-            comprobante_final.set_descripcion(cliente_final.get_nombre());
-            
+            comprobante_final.set_descripcion("T    "+cliente_destino.get_nombre()+" "+cuenta_destino.getID());
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
+            
+            //Creamos el comprobante para el destinatario
+            Comprobante comprobante_final2 = new Comprobante();
+            comprobante_final2.set_monto(monto);
+            comprobante_final2.set_id(cuenta_destino.getMovimientos().size()+1);
+            comprobante_final2.set_descripcion("D   "+cliente_final.get_nombre()+" "+cuenta_final.getID());
+            //Agrega el comprobante en el historial de la cuenta
+            cuenta_destino.setMovimientos(comprobante_final2);
         }
     }
     
@@ -227,7 +243,7 @@ public class GUI_Transferencias extends javax.swing.JFrame {
             int banco = jComboBox2.getSelectedIndex();
             String nombre = jTextField4.getText();
             String ci_ruc = jTextField3.getText().replaceAll(" ","");
-            int monto = Integer.parseInt(jTextField2.getText().replaceAll(" ", ""));
+            monto = Integer.parseInt(jTextField2.getText().replaceAll(" ", ""));
             int cuenta_nmr = Integer.parseInt(jTextField1.getText().replaceAll(" ",""));
             
             //Banco distinto a Continental
@@ -251,7 +267,6 @@ public class GUI_Transferencias extends javax.swing.JFrame {
                     }
                     jTextField4.setText("");
                     jTextField1.setText("");
-                    return;
                 }
             }
             jTextField3.setText("");
@@ -266,6 +281,11 @@ public class GUI_Transferencias extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

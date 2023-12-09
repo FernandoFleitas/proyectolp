@@ -21,7 +21,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     private GUI_Estado_Cuenta MenuEstadoCuenta = new GUI_Estado_Cuenta();
     private GUI_Pago_Servicios MenuPagoServicios = new GUI_Pago_Servicios();
     private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
-    private GUI_Transferencias MenuTransferencias = new GUI_Transferencias(); 
+    private GUI_Transferencias menu_Trans; 
  
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
@@ -161,8 +161,8 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        GUI_Transferencias menu_Trans = new GUI_Transferencias();
-        menu_Trans.set_Datos(clientes, cliente_final, cuenta_final);
+        menu_Trans = new GUI_Transferencias();
+        menu_Trans.set_Datos(clientes, cliente_final, cuenta_final,this);
         menu_Trans.setVisible(true);
         menu_Trans.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
