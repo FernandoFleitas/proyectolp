@@ -5,6 +5,7 @@
 package GUI;
 import Clases.Cliente;
 import Clases.Cuenta;
+import Hilos.Hilo_Transferencia;
 import Clases.Individuo;
 import Clases.Empresa; 
 
@@ -158,13 +159,12 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         menu_Estado.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        MenuTransferencias = new GUI_Transferencias();
-        MenuTransferencias.set_Datos(clientes, cliente_final, cuenta_final,this);
-        MenuTransferencias.setVisible(true);
-        MenuTransferencias.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Hilo_Transferencia hilo_transferencia = new Hilo_Transferencia(clientes,cliente_final,cuenta_final,this);
+        hilo_transferencia.start();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

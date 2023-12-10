@@ -10,7 +10,7 @@ import java.awt.Dialog;
 
 /**
  *
- * @author josef
+ * @author jose
  */
 public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
     
@@ -248,7 +248,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
             
             //Banco distinto a Continental
             if(banco != 0)return;
-            if(monto<0){
+            if(monto<0 || cuenta_final.getSaldo()<monto){
                 jTextField2.setText("");
                 return;
             }
