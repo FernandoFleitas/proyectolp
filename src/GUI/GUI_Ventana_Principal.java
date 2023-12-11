@@ -8,6 +8,9 @@ import Clases.Cuenta;
 import Hilos.Hilo_Transferencia;
 import Clases.Individuo;
 import Clases.Empresa; 
+import Clases.Pago;
+import Clases.Servicio;
+import Clases.Tarjeta_Credito;
 
 /**
  *
@@ -26,6 +29,21 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
  
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
+    
+    Servicio sAgua = new Servicio(1, "Factura Agua");
+    Servicio sLuz = new Servicio(2, "Factura Luz");
+    Servicio sTel = new Servicio (3, "Factura Teléfono");
+        
+    Pago pAgua = new Pago(sAgua.getID(), 50);
+    Pago pLuz = new Pago(sLuz.getID(), 300);
+    Pago pTel = new Pago(sTel.getID(), 100);
+    
+    Pago[] arrayPagos = new Pago[]{pAgua, pLuz, pTel};
+    Servicio[] arrayServicios = new Servicio[]{sAgua, sLuz, sTel};
+    
+    Tarjeta_Credito credito1 = new Tarjeta_Credito(55555, 10000, "12/23", 123 ,10000);
+    
+    Tarjeta_Credito[] tarjetas = new Tarjeta_Credito[]{credito1};
     
     public GUI_Ventana_Principal() {
         initComponents();
@@ -171,6 +189,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         // TODO add your handling code here:
         GUI_Pago_Servicios menu_Servicios = new GUI_Pago_Servicios();
         menu_Servicios.setVisible(true);
+        menu_Servicios.InicializarTodo(arrayPagos, arrayServicios, cuenta_final, cliente_final, tarjetas, this);
         menu_Servicios.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
