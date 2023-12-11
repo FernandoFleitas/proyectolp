@@ -9,7 +9,29 @@ import Clases.Comprobante;
 import java.awt.Dialog;
 
 /**
+ * La clase `GUI_Transferencias` representa la interfaz gráfica para realizar transferencias entre cuentas.
  *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code clientes} - Arreglo de objetos `Cliente` representando la lista de clientes.</li>
+ *   <li>{@code menu_validar} - Objeto `GUI_Pin_Transaccion` para validar el PIN antes de realizar la transferencia.</li>
+ *   <li>{@code menu_principal} - Objeto `GUI_Ventana_Principal` representando el menú principal.</li>
+ *   <li>{@code cliente_final} - Objeto `Cliente` representando al cliente que realiza la transferencia.</li>
+ *   <li>{@code cuenta_final} - Objeto `Cuenta` representando la cuenta del cliente que realiza la transferencia.</li>
+ *   <li>{@code cliente_destino} - Objeto `Cliente` representando al destinatario de la transferencia.</li>
+ *   <li>{@code cuenta_destino} - Objeto `Cuenta` representando la cuenta del destinatario de la transferencia.</li>
+ *   <li>{@code monto} - Entero que representa el monto de la transferencia.</li>
+ *   <li>{@code validador} - Booleano que indica si los datos de la transferencia son válidos.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final, GUI_Ventana_Principal menu_principal)} - Inicializa los datos para la transferencia.</li>
+ *   <li>{@code cerrar()} - Implementación del método `cerrar` de la interfaz `Interfaz`. Actualiza la información en el menú principal y cierra la ventana de transferencias.</li>
+ *   <li>{@code transferir()} - Realiza la transferencia entre cuentas y actualiza los historiales de movimientos de ambas cuentas.</li>
+ *   <li>{@code validar_inputs()} - Valida los datos ingresados para la transferencia.</li>
+ * </ul>
+ * 
  * @author jose
  */
 public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{

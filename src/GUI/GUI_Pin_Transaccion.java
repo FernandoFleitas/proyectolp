@@ -5,7 +5,26 @@
 package GUI;
 import Clases.Cuenta;
 /**
+ * La clase `GUI_Pin_Transaccion` representa la interfaz gráfica para validar el PIN antes de realizar una transacción.
+ * Puede ser utilizada para transferencias, pagos de servicios o pagos de tarjetas.
  *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code istransferencia} - Entero que indica el tipo de transacción (0 para transferencia, 1 para pago de servicio, 2 para pago de tarjeta).</li>
+ *   <li>{@code cuenta_final} - Objeto `Cuenta` representando la cuenta del cliente.</li>
+ *   <li>{@code menu_transferencias} - Objeto `GUI_Transferencias` para transferencias.</li>
+ *   <li>{@code menu_servicios} - Objeto `GUI_Pago_Servicios` para pagos de servicios.</li>
+ *   <li>{@code menu_Tarjetas} - Objeto `GUI_Pago_Tarjetas` para pagos de tarjetas.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code get_istransferencia()} - Retorna el tipo de transacción.</li>
+ *   <li>{@code set_Datos(Cuenta cuenta_final, GUI_Transferencias menu_transferencias)} - Inicializa los datos para transferencias.</li>
+ *   <li>{@code set_Datos(Cuenta cuenta_final, GUI_Pago_Servicios menu_servicios)} - Inicializa los datos para pagos de servicios.</li>
+ *   <li>{@code set_Datos(Cuenta cuenta_final, GUI_Pago_Tarjetas menu_Tarjetas)} - Inicializa los datos para pagos de tarjetas.</li>
+ * </ul>
+ * 
  * @author josef
  */
 public class GUI_Pin_Transaccion extends javax.swing.JFrame {

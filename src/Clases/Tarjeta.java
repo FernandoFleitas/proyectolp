@@ -5,8 +5,31 @@
 package Clases;
 
 /**
+ * La clase `Tarjeta` representa una tarjeta bancaria en el sistema.
  *
- * @author EJFR0
+ * <p>Cada tarjeta tiene un número único de tarjeta, un saldo asociado, una fecha de vencimiento
+ * y un código de seguridad (CVC).</p>
+ *
+ * <p><strong>Constructor:</strong></p>
+ * <ul>
+ *   <li>{@code Tarjeta(int N_Tarjeta, int Saldo, String FechaVencimiento, int CVC)} - Crea una
+ *   instancia de tarjeta con un número de tarjeta, saldo, fecha de vencimiento y CVC específicos.</li>
+ * </ul>
+ *
+ * <p><strong>Getters y Setters:</strong></p>
+ * <ul>
+ *   <li>{@code getN_Tarjeta()} - Obtiene el número de la tarjeta.</li>
+ *   <li>{@code setN_Tarjeta(int N_Tarjeta)} - Establece el número de la tarjeta.</li>
+ *   <li>{@code getSaldo()} - Obtiene el saldo asociado a la tarjeta.</li>
+ *   <li>{@code setSaldo(int Saldo)} - Establece el saldo asociado a la tarjeta.</li>
+ *   <li>{@code getFechaVencimiento()} - Obtiene la fecha de vencimiento de la tarjeta.</li>
+ *   <li>{@code setFechaVencimiento(String FechaVencimiento)} - Establece la fecha de vencimiento de
+ *   la tarjeta.</li>
+ *   <li>{@code getCVC()} - Obtiene el código de seguridad (CVC) de la tarjeta.</li>
+ *   <li>{@code setCVC(int CVC)} - Establece el código de seguridad (CVC) de la tarjeta.</li>
+ * </ul>
+ * 
+ * @author [Hola]
  */
 public class Tarjeta {
     protected int N_Tarjeta;

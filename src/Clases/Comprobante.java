@@ -1,7 +1,22 @@
 package Clases;
 
 /**
- * Clase que representa un comprobante de transacción.
+ * La clase `Comprobante` representa un comprobante de transacción en el sistema bancario.
+ *
+ * <p>Este comprobante contiene información sobre la transacción, incluyendo el ID de la transacción,
+ * el monto de la transacción y una descripción asociada.</p>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code set_id(int id)} - Establece el ID de la transacción.</li>
+ *   <li>{@code set_monto(int monto)} - Establece el monto de la transacción.</li>
+ *   <li>{@code set_descripcion(String descripcion)} - Establece la descripción de la transacción.</li>
+ *   <li>{@code get_id()} - Obtiene el ID de la transacción.</li>
+ *   <li>{@code get_monto()} - Obtiene el monto de la transacción.</li>
+ *   <li>{@code get_descripcion()} - Obtiene la descripción de la transacción.</li>
+ * </ul>
+ * 
+ * @author Hola
  */
 public class Comprobante {
     // Atributos

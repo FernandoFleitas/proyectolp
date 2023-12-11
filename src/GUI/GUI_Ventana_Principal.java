@@ -13,7 +13,31 @@ import Clases.Servicio;
 import Clases.Tarjeta_Credito;
 
 /**
+ * La clase `GUI_Ventana_Principal` representa la interfaz gráfica de la ventana principal del sistema bancario.
  *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code clientes} - Arreglo de objetos `Cliente` representando la lista de clientes.</li>
+ *   <li>{@code MenuEstadoCuenta} - Objeto `GUI_Estado_Cuenta` para visualizar el estado de cuenta del usuario.</li>
+ *   <li>{@code MenuPagoServicios} - Objeto `GUI_Pago_Servicios` para realizar pagos de servicios.</li>
+ *   <li>{@code MenuPagoTarjetas} - Objeto `GUI_Pago_Tarjetas` para realizar pagos de tarjetas de crédito.</li>
+ *   <li>{@code MenuTransferencias} - Objeto `GUI_Transferencias` para realizar transferencias entre cuentas.</li>
+ *   <li>{@code tarjetas} - Arreglo de objetos `Tarjeta_Credito` representando las tarjetas de crédito asociadas al cliente.</li>
+ *   <li>{@code cliente_final} - Objeto `Cliente` representando al usuario actual.</li>
+ *   <li>{@code cuenta_final} - Objeto `Cuenta` representando la cuenta del usuario actual.</li>
+ *   <li>{@code sAgua}, {@code sLuz}, {@code sTel} - Objetos `Servicio` representando servicios de agua, luz y teléfono.</li>
+ *   <li>{@code pAgua}, {@code pLuz}, {@code pTel} - Objetos `Pago` representando pagos de servicios de agua, luz y teléfono.</li>
+ *   <li>{@code arrayPagos} - Arreglo de objetos `Pago` representando los pagos realizados.</li>
+ *   <li>{@code arrayServicios} - Arreglo de objetos `Servicio` representando los servicios disponibles.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code set_Usuario_Saldo()} - Actualiza la información del usuario y su saldo en la interfaz.</li>
+ *   <li>{@code set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final, Tarjeta_Credito[] tarjetas)} - Inicializa los datos necesarios para la ventana principal.</li>
+ *   <li>{@code cerrar()} - Cierra la ventana actual.</li>
+ * </ul>
+ * 
  * @author EJFR0
  */
 public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfaz{

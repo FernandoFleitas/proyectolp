@@ -11,6 +11,22 @@ import Clases.Tarjeta_Credito;
 import static java.lang.Integer.parseInt;
 
 /**
+ * La clase `GUI_Pago_Tarjetas` representa la interfaz gráfica para realizar pagos de tarjetas de crédito.
+ * Permite al usuario ingresar el número de tarjeta y el monto a pagar, realizando validaciones y actualizando la información de la cuenta.
+ *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code menu_principal} - Objeto `GUI_Ventana_Principal` representando el menú principal.</li>
+ *   <li>{@code tarjetas} - Arreglo de objetos `Tarjeta_Credito`.</li>
+ *   <li>{@code cuenta_final} - Objeto `Cuenta` representando la cuenta del cliente.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code InicializarPagoTarjetas(Tarjeta_Credito[] tarjetas, Cuenta cuenta_final, GUI_Ventana_Principal menu_principal)} - Inicializa los datos de la interfaz.</li>
+ *   <li>{@code cerrar()} - Cierra la interfaz y actualiza la información en la ventana principal.</li>
+ *   <li>{@code pagar()} - Realiza el proceso de pago y actualiza la información de la cuenta y el historial.</li>
+ * </ul>
  *
  * @author EJFR0
  */

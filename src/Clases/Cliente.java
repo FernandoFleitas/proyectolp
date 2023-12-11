@@ -5,22 +5,14 @@
 package Clases;
 
 /**
- * La clase Cliente es la clase base para representar a un cliente en el sistema de banca en línea.
- * 
- * <p><strong>Atributos:</strong></p>
- * <ul>
- *   <li>{@code ci_ruc} - Número de cédula de identidad o RUC del cliente.</li>
- *   <li>{@code razon_social} - Razón social del cliente (en caso de ser una empresa).</li>
- *   <li>{@code pin} - PIN de seguridad asociado al cliente.</li>
- *   <li>{@code direccion} - Dirección del cliente.</li>
- *   <li>{@code telefono} - Número de teléfono del cliente.</li>
- *   <li>{@code nombre} - Nombre del cliente.</li>
- *   <li>{@code cuenta} - Arreglo de cuentas asociadas al cliente.</li>
- * </ul>
+ * La clase `Cliente` representa a un cliente del sistema bancario.
+ *
+ * <p>Esta clase contiene información como el número de cédula de identidad o RUC del cliente,
+ * la razón social en caso de ser una empresa, el PIN de seguridad, la dirección, el número de teléfono,
+ * el nombre del cliente y un arreglo de cuentas asociadas a él.</p>
  *
  * <p><strong>Métodos:</strong></p>
  * <ul>
- *   <li>{@code Cliente(String ci_ruc, String razon_social, int pin, String direccion, int telefono, Cuenta[] cuenta, String nombre)} - Constructor que inicializa un cliente con la información proporcionada.</li>
  *   <li>{@code get_ci_ruc()} - Devuelve el número de cédula de identidad o RUC del cliente.</li>
  *   <li>{@code set_ci_ruc(String ci_ruc)} - Establece el número de cédula de identidad o RUC del cliente.</li>
  *   <li>{@code get_razon_social()} - Devuelve la razón social del cliente (en caso de ser una empresa).</li>
@@ -35,11 +27,8 @@ package Clases;
  *   <li>{@code get_Cuenta()} - Devuelve el arreglo de cuentas asociadas al cliente.</li>
  *   <li>{@code get_nombre()} - Devuelve el nombre del cliente.</li>
  * </ul>
- *
- * <p>Esta clase representa a un cliente en el sistema de banca en línea.</p>
  * 
- * <p><strong>Autor:</strong> EJFR0</p>
- * @version 1.0
+ * @author EJFR0
  */
 public class Cliente {
     

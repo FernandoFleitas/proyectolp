@@ -10,8 +10,28 @@ import Clases.Cuenta;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
+ * La clase `Hilo_Transferencia` extiende la clase `Thread` y representa un hilo para la funcionalidad
+ * de transferencias en el sistema bancario.
  *
- * @author joser
+ * <p>Este hilo se encarga de crear y mostrar la interfaz gráfica de usuario para realizar transferencias
+ * entre cuentas.</p>
+ *
+ * <p><strong>Constructor:</strong></p>
+ * <ul>
+ *   <li>{@code Hilo_Transferencia(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final,
+ *   GUI_Ventana_Principal ventana_principal)} - Crea una instancia de hilo de transferencia con la información
+ *   necesaria para su ejecución.</li>
+ * </ul>
+ *
+ * <p><strong>Método `run`:</strong></p>
+ * <ul>
+ *   <li>{@code run()} - Implementa la lógica del hilo, creando y mostrando la interfaz gráfica de transferencias.</li>
+ * </ul>
+ *
+ * <p>El hilo utiliza una instancia de la clase `GUI_Transferencias` para la interfaz gráfica y
+ * se asegura de que la interfaz se cierre correctamente al finalizar.</p>
+ * 
+ * @author Hola
  */
 public class Hilo_Transferencia extends Thread {
     Cliente []clientes;

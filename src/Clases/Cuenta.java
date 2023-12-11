@@ -1,4 +1,4 @@
-   /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -14,20 +14,26 @@ import java.util.ArrayList;
  *   <li>{@code ID} - Identificador único de la cuenta.</li>
  *   <li>{@code pin_transaccion} - PIN de transacción asociado a la cuenta.</li>
  *   <li>{@code saldo} - Saldo actual de la cuenta.</li>
- *   <li>{@code tarjeta_debito} - Número de tarjeta de débito asociada a la cuenta.</li>
+ *   <li>{@code tarjetas} - Lista de tarjetas de crédito asociadas a la cuenta.</li>
+ *   <li>{@code Movimientos} - Lista de movimientos asociados a la cuenta.</li>
+ *   <li>{@code tarjeta_debito} - Tarjeta de débito asociada a la cuenta.</li>
  * </ul>
  *
  * <p><strong>Métodos:</strong></p>
  * <ul>
- *   <li>{@code Cuenta(int ID, int pin_transaccion, int saldo, int tarjeta_debito)} - Constructor que inicializa una cuenta con la información proporcionada.</li>
+ *   <li>{@code Cuenta(int ID, int pin_transaccion, int saldo)} - Constructor que inicializa una cuenta con la información proporcionada.</li>
  *   <li>{@code getID()} - Devuelve el identificador único de la cuenta.</li>
  *   <li>{@code setID(int ID)} - Establece el identificador único de la cuenta.</li>
  *   <li>{@code getPinTransaccion()} - Devuelve el PIN de transacción de la cuenta.</li>
  *   <li>{@code setPinTransaccion(int pin_transaccion)} - Establece el PIN de transacción de la cuenta.</li>
  *   <li>{@code getSaldo()} - Devuelve el saldo actual de la cuenta.</li>
  *   <li>{@code setSaldo(int saldo)} - Establece el saldo actual de la cuenta.</li>
- *   <li>{@code getTarjetaDebito()} - Devuelve el número de tarjeta de débito asociada a la cuenta.</li>
- *   <li>{@code setTarjetaDebito(int tarjeta_debito)} - Establece el número de tarjeta de débito asociada a la cuenta.</li>
+ *   <li>{@code getTarjetas()} - Devuelve la lista de tarjetas de crédito asociadas a la cuenta.</li>
+ *   <li>{@code setTarjetas(Tarjeta_Credito tarjeta)} - Añade una tarjeta de crédito a la lista de tarjetas asociadas a la cuenta.</li>
+ *   <li>{@code getMovimientos()} - Devuelve la lista de movimientos asociados a la cuenta.</li>
+ *   <li>{@code setMovimientos(Comprobante comprobante)} - Añade un comprobante a la lista de movimientos asociados a la cuenta.</li>
+ *   <li>{@code getTarjeta_debito()} - Devuelve la tarjeta de débito asociada a la cuenta.</li>
+ *   <li>{@code setTarjeta_debito(Tarjeta_Debito tarjeta_debito)} - Establece la tarjeta de débito asociada a la cuenta.</li>
  * </ul>
  *
  * <p>Esta clase representa una cuenta asociada a un cliente en el sistema de banca en línea.</p>
@@ -43,11 +49,11 @@ public class Cuenta {
     private int pin_transaccion;
     /** Saldo actual de la cuenta. */
     private int saldo;
-    /** Número de tarjeta de débito asociada a la cuenta. */
+    /** Lista de tarjetas de crédito asociadas a la cuenta. */
     private ArrayList<Tarjeta_Credito> tarjetas;
-    
+    /** Lista de movimientos asociados a la cuenta. */
     private ArrayList<Comprobante> Movimientos;
-    
+    /** Tarjeta de débito asociada a la cuenta. */
     private Tarjeta_Debito tarjeta_debito;
 
     /**
@@ -55,7 +61,6 @@ public class Cuenta {
      * @param ID Identificador único de la cuenta.
      * @param pin_transaccion PIN de transacción asociado a la cuenta.
      * @param saldo Saldo actual de la cuenta.
-     * @param tarjeta_debito Número de tarjeta de débito asociada a la cuenta.
      */
     public Cuenta(int ID, int pin_transaccion, int saldo) {
         
@@ -117,8 +122,8 @@ public class Cuenta {
     }
 
     /**
-     * Devuelve el número de tarjeta de débito asociada a la cuenta.
-     * @return El número de tarjeta de débito asociada a la cuenta.
+     * Devuelve la lista de tarjetas de crédito asociadas a la cuenta.
+     * @return La lista de tarjetas de crédito asociadas a la cuenta.
      */
     public ArrayList<Tarjeta_Credito> getTarjetas() {
         return tarjetas;
@@ -126,30 +131,43 @@ public class Cuenta {
     
 
     /**
-     * Establece el número de tarjeta de débito asociada a la cuenta.
-     * @param tarjeta
+     * Añade una tarjeta de crédito a la lista de tarjetas asociadas a la cuenta.
+     * @param tarjeta La tarjeta de crédito a añadir.
      */
-
-    
     public void setTarjetas(Tarjeta_Credito tarjeta){
         tarjetas.add (tarjeta);
     }
 
+    /**
+     * Devuelve la lista de movimientos asociados a la cuenta.
+     * @return La lista de movimientos asociados a la cuenta.
+     */
     public ArrayList<Comprobante> getMovimientos() {
         return Movimientos;
     }
     
+    /**
+     * Añade un comprobante a la lista de movimientos asociados a la cuenta.
+     * @param comprobante El comprobante a añadir.
+     */
     public void setMovimientos(Comprobante comprobante){
         Movimientos.add(comprobante);
     }
 
+    /**
+     * Devuelve la tarjeta de débito asociada a la cuenta.
+     * @return La tarjeta de débito asociada a la cuenta.
+     */
     public Tarjeta_Debito getTarjeta_debito() {
         return tarjeta_debito;
     }
 
+    /**
+     * Establece la tarjeta de débito asociada a la cuenta.
+     * @param tarjeta_debito La nueva tarjeta de débito asociada a la cuenta.
+     */
     public void setTarjeta_debito(Tarjeta_Debito tarjeta_debito) {
         this.tarjeta_debito = tarjeta_debito;
     }
     
 }
-

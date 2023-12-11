@@ -49,6 +49,7 @@ import Clases.Tarjeta_Debito;
  * @see GUI_Ventana_Principal
  * @see GUI_Ayuda
  */
+
 public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
 
     /**
