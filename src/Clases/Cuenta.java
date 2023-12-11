@@ -44,7 +44,7 @@ public class Cuenta {
     /** Saldo actual de la cuenta. */
     private int saldo;
     /** Número de tarjeta de débito asociada a la cuenta. */
-    private ArrayList<Tarjeta> tarjetas;
+    private ArrayList<Tarjeta_Credito> tarjetas;
     
     private ArrayList<Comprobante> Movimientos;
     
@@ -62,7 +62,7 @@ public class Cuenta {
         this.ID = ID;
         this.pin_transaccion = pin_transaccion;
         this.saldo = saldo;
-        this.tarjetas = new ArrayList<Tarjeta>();
+        this.tarjetas = new ArrayList<Tarjeta_Credito>();
         this.Movimientos = new ArrayList<Comprobante>();
         
     }
@@ -120,7 +120,7 @@ public class Cuenta {
      * Devuelve el número de tarjeta de débito asociada a la cuenta.
      * @return El número de tarjeta de débito asociada a la cuenta.
      */
-    public ArrayList<Tarjeta> getTarjetas() {
+    public ArrayList<Tarjeta_Credito> getTarjetas() {
         return tarjetas;
     }
     
@@ -131,7 +131,7 @@ public class Cuenta {
      */
 
     
-    public void setTarjetas(Tarjeta tarjeta){
+    public void setTarjetas(Tarjeta_Credito tarjeta){
         tarjetas.add (tarjeta);
     }
 

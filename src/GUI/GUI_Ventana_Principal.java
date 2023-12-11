@@ -26,7 +26,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     private GUI_Pago_Servicios MenuPagoServicios = new GUI_Pago_Servicios();
     private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
     private GUI_Transferencias MenuTransferencias; 
- 
+    private Tarjeta_Credito [] tarjetas;
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
     
@@ -41,9 +41,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     Pago[] arrayPagos = new Pago[]{pAgua, pLuz, pTel};
     Servicio[] arrayServicios = new Servicio[]{sAgua, sLuz, sTel};
     
-    Tarjeta_Credito credito1 = new Tarjeta_Credito(55555, 10000, "12/23", 123 ,10000);
     
-    Tarjeta_Credito[] tarjetas = new Tarjeta_Credito[]{credito1};
     
     public GUI_Ventana_Principal() {
         initComponents();
@@ -197,6 +195,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         // TODO add your handling code here:
         GUI_Pago_Tarjetas menu_Tarjetas = new GUI_Pago_Tarjetas();
         menu_Tarjetas.setVisible(true);
+        menu_Tarjetas.InicializarPagoTarjetas(tarjetas, cuenta_final, this);
         menu_Tarjetas.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -215,11 +214,12 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         jLabel2.setText("Saldo: "+ cuenta_final.getSaldo() + " Gs");
     }
     
-    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final)
+    public void set_Datos(Cliente[] clientes, Cliente cliente_final, Cuenta cuenta_final, Tarjeta_Credito[] tarjetas)
     {
         this.clientes = clientes;
         this.cliente_final = cliente_final;
         this.cuenta_final = cuenta_final;
+        this.tarjetas = tarjetas;
     }
     
     public void cerrar() {

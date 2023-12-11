@@ -208,6 +208,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
+    @Override
     public void cerrar(){
         menu_principal.set_Usuario_Saldo();
         dispose();

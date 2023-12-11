@@ -60,6 +60,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     private boolean validador = false; 
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
+    private Tarjeta_Credito[] tarjetas = new Tarjeta_Credito[3];
    
     /**
      * Constructor para la clase GUI_Inicio_Sesion.
@@ -211,7 +212,8 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
         validarPin();
         if(validador)
         {   
-            menu_principal.set_Datos(clientes,cliente_final,cuenta_final);
+            System.out.println(tarjetas[0].getN_Tarjeta());
+            menu_principal.set_Datos(clientes,cliente_final,cuenta_final, tarjetas);
             menu_principal.set_Usuario_Saldo();
             menu_principal.setVisible(true);
             cerrar();
@@ -235,6 +237,7 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
         Menu_Ayuda.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_helpMenuMouseClicked
     
+    @Override
     public void cerrar()
     {
         dispose();
@@ -280,13 +283,15 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     }
     
     public void crear_Datos()
-    {   
+    {
         
+        Tarjeta_Credito tarjetac1 = new Tarjeta_Credito(123456789, 2000, "12/25", 123, 5000);
+        Tarjeta_Credito tarjetac2 = new Tarjeta_Credito(987654321, 1000, "10/24", 456, 3000);
+        Tarjeta_Credito tarjetac3 = new Tarjeta_Credito(567890123, 2000, "08/23", 789, 2000);
         
-        
-        Tarjeta tarjetac1 = new Tarjeta_Credito(123456789, 1000, "12/25", 123, 5000);
-        Tarjeta tarjetac2 = new Tarjeta_Credito(987654321, 500, "10/24", 456, 3000);
-        Tarjeta tarjetac3 = new Tarjeta_Credito(567890123, 200, "08/23", 789, 2000);
+        tarjetas [0] = tarjetac1;
+        tarjetas [1] = tarjetac2;
+        tarjetas [2] = tarjetac3;
         
         Cuenta cuenta1 = new Cuenta(1, 1234, 1000);
         Cuenta cuenta2 = new Cuenta(2, 4321, 500);

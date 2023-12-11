@@ -5,6 +5,7 @@
 package GUI;
 
 import Clases.Cliente;
+import Clases.Comprobante;
 import Clases.Cuenta;
 import Clases.Pago;
 import Clases.Servicio;
@@ -16,7 +17,7 @@ import static java.lang.Integer.parseInt;
  *
  * @author EJFR0
  */
-public class GUI_Pago_Servicios extends javax.swing.JFrame {
+public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
     private Pago[] pagos;
     private Servicio[] servicios;
     private Cuenta cuenta_final;
@@ -114,6 +115,11 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel7.setText("Método de pago:");
@@ -204,6 +210,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame {
         // TODO add your handling code here:
         //VALIDAR DATOS
         int index = jComboBox1.getSelectedIndex();
+        int index2 = jComboBox2.getSelectedIndex()-1;
         if (jComboBox2.getSelectedIndex() == 0){
             try
         {
@@ -216,18 +223,73 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame {
                 jLabel8.setText("No tenes saldo, seco");
                 return;
             }
+            else{
+                GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
+                menu_validar.setVisible(true);
+                menu_validar.set_Datos(cuenta_final, this);
+                menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
             
         }catch(Exception e)
         {
             jTextField1.setText("");
         }
         }
-        
-        GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
-        menu_validar.setVisible(true);
-        menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        else {
+            try
+        {
+            pagos[index].setMonto(parseInt(jTextField1.getText()));
+            if (pagos[index].getMonto() < pagos[index].getPagoMin()){
+                jTextField1.setText("");
+                return;
+            }
+            else if (pagos[index].getMonto() > cuenta_final.getTarjetas().get(index2).getLimiteCredito()){
+                jLabel8.setText("No te alcanza el crédito papi");
+                return;
+            }
+            else{
+                GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
+                menu_validar.setVisible(true);
+                menu_validar.set_Datos(cuenta_final, this);
+                menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+            
+        }catch(Exception e)
+        {
+            jTextField1.setText("");
+        }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void pagar(){
+        int index = jComboBox1.getSelectedIndex();
+        int index2 = jComboBox2.getSelectedIndex()-1;
+        if (jComboBox2.getSelectedIndex() == 0) {
+            cuenta_final.setSaldo(cuenta_final.getSaldo()-pagos[index].getMonto());
+            //Creamos el comprobante
+            Comprobante comprobante_final = new Comprobante();
+            comprobante_final.set_monto(-pagos[index].getMonto());
+            comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
+            comprobante_final.set_descripcion("Pago de "+ servicios[index].getNombre());
+            //Agrega el comprobante en el historial de la cuenta
+            cuenta_final.setMovimientos(comprobante_final);
+        }
+        else {
+            cuenta_final.getTarjetas().get(index2).setLimiteCredito(cuenta_final.getTarjetas().get(index2).getLimiteCredito()-pagos[index].getMonto());
+            cuenta_final.getTarjetas().get(index2).setSaldo(cuenta_final.getTarjetas().get(index2).getSaldo()+pagos[index].getMonto());
+            //Creamos el comprobante
+            Comprobante comprobante_final = new Comprobante();
+            comprobante_final.set_monto(-pagos[index].getMonto());
+            comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
+            comprobante_final.set_descripcion("Pago de "+ servicios[index].getNombre() + "  (TC)");
+            //Agrega el comprobante en el historial de la cuenta
+            cuenta_final.setMovimientos(comprobante_final);
+        }
+    }
+    @Override
+    public void cerrar(){
+        menu_principal.set_Usuario_Saldo();
+        dispose();
+    }
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         int index = jComboBox1.getSelectedIndex();
@@ -244,6 +306,11 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,19 +4,36 @@
  */
 package GUI;
 
+import Clases.Comprobante;
+import Clases.Cuenta;
+import Clases.Tarjeta;
+import Clases.Tarjeta_Credito;
+import static java.lang.Integer.parseInt;
+
 /**
  *
  * @author EJFR0
  */
-public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
-
+public class GUI_Pago_Tarjetas extends javax.swing.JFrame implements Interfaz{
+    private GUI_Ventana_Principal menu_principal;
+    Tarjeta_Credito[] tarjetas;
+    Cuenta cuenta_final;
+    
+    
     /**
      * Creates new form Pago_Tarjetas
      */
+    
     public GUI_Pago_Tarjetas() {
         initComponents();
     }
 
+    public void InicializarPagoTarjetas(Tarjeta_Credito[] tarjetas, Cuenta cuenta_final, GUI_Ventana_Principal menu_principal){
+        this.tarjetas = tarjetas;
+        this.cuenta_final = cuenta_final;
+        this.menu_principal = menu_principal;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +50,7 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +83,14 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,7 +112,8 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextField1)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +129,9 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -119,11 +148,73 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
-        menu_validar.setVisible(true);
-        menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Tarjeta_Credito tarjetaApagar = null;
+        boolean validarTarjeta = false;
+        try
+        {
+            int Num_validar = parseInt(jTextField1.getText().replace(" ", ""));
+            int MontoAPagar = parseInt(jTextField2.getText().replace(" ", ""));
+            
+            for (Tarjeta_Credito tarjeta : tarjetas){
+                System.out.println(tarjeta.getN_Tarjeta());
+                if (tarjeta.getN_Tarjeta() == Num_validar) {
+                    validarTarjeta = true;
+                    tarjetaApagar = tarjeta;
+                    System.out.println();
+                    break;
+                }
+            }
+            if (validarTarjeta) {
+                if (tarjetaApagar.getSaldo()*0.1 > MontoAPagar) {
+                jLabel4.setText("Tu pago mínimo es " + tarjetaApagar.getSaldo()*0.1);
+                return;
+                }
+                else if (tarjetaApagar.getSaldo() > 0){
+                    GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();
+                    menu_validar.setVisible(true);
+                    menu_validar.set_Datos(cuenta_final, this);
+                    menu_validar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                }
+            }
+            else{
+                jLabel4.setText("La tarjeta no existe en la base de datos");
+            }
+        }catch(Exception e)
+        {
+            jTextField1.setText("");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+    @Override
+    public void cerrar(){
+        menu_principal.set_Usuario_Saldo();
+        dispose();
+    }
+    public void pagar () {
+        Tarjeta_Credito tarjetaApagar = null;
+        int Num_validar = parseInt(jTextField1.getText().replace(" ", ""));
+        for (Tarjeta_Credito tarjeta : tarjetas){
+                if (tarjeta.getN_Tarjeta() == Num_validar) {
+                    tarjetaApagar = tarjeta;
+                }
+            }
+        int MontoAPagar = parseInt(jTextField2.getText().replace(" ", ""));
+        cuenta_final.setSaldo(cuenta_final.getSaldo()-MontoAPagar);
+        tarjetaApagar.setLimiteCredito(tarjetaApagar.getLimiteCredito()+MontoAPagar);
+        tarjetaApagar.setSaldo(tarjetaApagar.getSaldo()-MontoAPagar);
+        //Creamos el comprobante
+        Comprobante comprobante_final = new Comprobante();
+        comprobante_final.set_monto(-MontoAPagar);
+        comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
+        comprobante_final.set_descripcion("Pago de tarjeta N°" + tarjetaApagar.getN_Tarjeta());
+        //Agrega el comprobante en el historial de la cuenta
+        cuenta_final.setMovimientos(comprobante_final);
+    }
     /**
      * @param args the command line arguments
      */
@@ -166,6 +257,7 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

@@ -10,9 +10,11 @@ import Clases.Cuenta;
  */
 public class GUI_Pin_Transaccion extends javax.swing.JFrame {
 
-    private boolean isvalido = false;
+    private int istransferencia; //0 es transferencia, 1 es pago de servicio y 2 es pago de tarjeta
     private Cuenta cuenta_final;
     private GUI_Transferencias menu_transferencias;
+    private GUI_Pago_Servicios menu_servicios;
+    private GUI_Pago_Tarjetas menu_Tarjetas;
     /**
      * Creates new form Validar_Pin_Transaccion
      */
@@ -21,13 +23,26 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
     }
 
     
-    public boolean get_isvalido(){
-        return isvalido;
+    public int get_istransferencia(){
+        return istransferencia;
     }
     
     public void set_Datos(Cuenta cuenta_final, GUI_Transferencias menu_transferencias){
         this.cuenta_final = cuenta_final;
         this.menu_transferencias = menu_transferencias;
+        istransferencia = 0;
+    }
+    
+    public void set_Datos(Cuenta cuenta_final, GUI_Pago_Servicios menu_servicios){
+        this.cuenta_final = cuenta_final;
+        this.menu_servicios = menu_servicios;
+        istransferencia = 1;
+    }
+    
+        public void set_Datos(Cuenta cuenta_final, GUI_Pago_Tarjetas menu_Tarjetas){
+        this.cuenta_final = cuenta_final;
+        this.menu_Tarjetas = menu_Tarjetas;
+        istransferencia = 2;
     }
     
     /**
@@ -125,12 +140,23 @@ public class GUI_Pin_Transaccion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            int pin_ingresado = Integer.parseInt(jPasswordField1.getText());
+            int pin_ingresado = Integer.parseInt(jPasswordField1.getText().replace(" ", ""));
             if(pin_ingresado == cuenta_final.getPinTransaccion()){
-                isvalido = true;
-                menu_transferencias.transferir();
-                dispose();
-                menu_transferencias.cerrar();
+                if (istransferencia == 0){
+                    menu_transferencias.transferir();
+                    dispose();
+                    menu_transferencias.cerrar();
+                }
+                else if (istransferencia == 1) {
+                    menu_servicios.pagar();
+                    dispose();
+                    menu_servicios.cerrar();
+                }
+                else{
+                    menu_Tarjetas.pagar();
+                    dispose();
+                    menu_Tarjetas.cerrar();
+                }
             }
             else jPasswordField1.setText("");
         }catch(Exception e)

@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/joser/OneDrive/Escritorio/JOSEF/FaQ%20%20INFO/Logica/proyectolp/src/GUI/GUI_Ventana_Principal.java</file>
-            <file>file:/C:/Users/joser/OneDrive/Escritorio/JOSEF/FaQ%20%20INFO/Logica/proyectolp/src/GUI/GUI_Pin_Transaccion.java</file>
-            <file>file:/C:/Users/joser/OneDrive/Escritorio/JOSEF/FaQ%20%20INFO/Logica/proyectolp/src/GUI/GUI_Transferencias.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/Clases/Tarjeta.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/GUI/GUI_Estado_Cuenta.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/GUI/GUI_Ventana_Principal.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/Clases/Tarjeta_Credito.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/Clases/Tarjeta_Debito.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/Clases/Pago.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/GUI/GUI_Inicio_Sesion.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/GUI/GUI_Transferencias.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/GUI/GUI_Pago_Servicios.java</file>
+            <file>file:/C:/Users/VarLuks/Documents/PROYECTO%20LP%202/proyectolp/src/Clases/Cuenta.java</file>
         </group>
     </open-files>
 </project-private>

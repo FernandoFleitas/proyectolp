@@ -78,7 +78,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
     public void set_Usuario_Cuenta_Tarjeta_Saldo(){
         jLabel1.setText("Usuario: " + cliente_final.get_nombre());
         jLabel2.setText("Cuenta: "+ cuenta_final.getID());
-        jLabel4.setText("Tarjeta Débito N°: "+ cuenta_final.getTarjetaDebito());
+        jLabel4.setText("Tarjeta Débito N°: "+ cuenta_final.getTarjeta_debito().getN_Tarjeta());
         jLabel3.setText("Saldo: "+ cuenta_final.getSaldo() + " Gs");
     }
     
