@@ -44,9 +44,11 @@ public class Cuenta {
     /** Saldo actual de la cuenta. */
     private int saldo;
     /** Número de tarjeta de débito asociada a la cuenta. */
-    private int tarjeta_debito;
+    private ArrayList<Tarjeta> tarjetas;
     
     private ArrayList<Comprobante> Movimientos;
+    
+    private Tarjeta_Debito tarjeta_debito;
 
     /**
      * Constructor que inicializa una cuenta con la información proporcionada.
@@ -55,13 +57,14 @@ public class Cuenta {
      * @param saldo Saldo actual de la cuenta.
      * @param tarjeta_debito Número de tarjeta de débito asociada a la cuenta.
      */
-    public Cuenta(int ID, int pin_transaccion, int saldo, int tarjeta_debito) {
+    public Cuenta(int ID, int pin_transaccion, int saldo) {
         
         this.ID = ID;
         this.pin_transaccion = pin_transaccion;
         this.saldo = saldo;
-        this.tarjeta_debito = tarjeta_debito;
+        this.tarjetas = new ArrayList<Tarjeta>();
         this.Movimientos = new ArrayList<Comprobante>();
+        
     }
 
     /**
@@ -110,30 +113,43 @@ public class Cuenta {
      */
     public void setSaldo(int saldo) {
         this.saldo = saldo;
+        tarjeta_debito.setSaldo(saldo);
     }
 
     /**
      * Devuelve el número de tarjeta de débito asociada a la cuenta.
      * @return El número de tarjeta de débito asociada a la cuenta.
      */
-    public int getTarjetaDebito() {
-        return tarjeta_debito;
+    public ArrayList<Tarjeta> getTarjetas() {
+        return tarjetas;
     }
+    
 
     /**
      * Establece el número de tarjeta de débito asociada a la cuenta.
-     * @param tarjeta_debito El nuevo número de tarjeta de débito asociada a la cuenta.
+     * @param tarjeta
      */
-    public void setTarjetaDebito(int tarjeta_debito) {
-        this.tarjeta_debito = tarjeta_debito;
-    }
+
     
-    public ArrayList<Comprobante> getMovimientos(){
+    public void setTarjetas(Tarjeta tarjeta){
+        tarjetas.add (tarjeta);
+    }
+
+    public ArrayList<Comprobante> getMovimientos() {
         return Movimientos;
     }
     
     public void setMovimientos(Comprobante comprobante){
         Movimientos.add(comprobante);
     }
+
+    public Tarjeta_Debito getTarjeta_debito() {
+        return tarjeta_debito;
+    }
+
+    public void setTarjeta_debito(Tarjeta_Debito tarjeta_debito) {
+        this.tarjeta_debito = tarjeta_debito;
+    }
+    
 }
 

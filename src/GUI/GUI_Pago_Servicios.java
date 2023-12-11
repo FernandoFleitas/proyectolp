@@ -8,6 +8,7 @@ import Clases.Cliente;
 import Clases.Cuenta;
 import Clases.Pago;
 import Clases.Servicio;
+import Clases.Tarjeta;
 import Clases.Tarjeta_Credito;
 import static java.lang.Integer.parseInt;
 
@@ -40,8 +41,11 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame {
             jComboBox1.addItem(servicio.getNombre());
         }
         
-        jComboBox2.addItem("Cuenta de banco");
+        jComboBox2.addItem("Tarjeta Débito");
         
+        for (Tarjeta tarjeta : cuenta_final.getTarjetas()){
+            jComboBox2.addItem("Tarjeta N° " + tarjeta.getN_Tarjeta());
+        }
         
         
         int index = jComboBox1.getSelectedIndex();

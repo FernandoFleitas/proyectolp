@@ -9,20 +9,19 @@ package Clases;
  * @author EJFR0
  */
 public class Tarjeta_Debito extends Tarjeta {
-    private String Cuenta;
+    private Cuenta cuenta;
 
     // Constructor
-    public Tarjeta_Debito(int N_Tarjeta, int Saldo, String FechaVencimiento, int CVC, String Cuenta) {
+    public Tarjeta_Debito(int N_Tarjeta, int Saldo, String FechaVencimiento, int CVC) {
         super(N_Tarjeta, Saldo, FechaVencimiento, CVC);
-        this.Cuenta = Cuenta;
     }
 
     // Getter y setter específico para Cuenta
-    public String getCuenta() {
-        return Cuenta;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
-    public void setCuenta(String Cuenta) {
-        this.Cuenta = Cuenta;
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 }

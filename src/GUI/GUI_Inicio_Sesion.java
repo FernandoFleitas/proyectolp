@@ -7,6 +7,9 @@ import Clases.Cliente;
 import Clases.Cuenta;
 import Clases.Individuo;
 import Clases.Empresa; 
+import Clases.Tarjeta;
+import Clases.Tarjeta_Credito;
+import Clases.Tarjeta_Debito;
 
 /**
  * La clase GUI_Inicio_Sesion representa la interfaz gráfica para el proceso de inicio de sesión de clientes.
@@ -278,10 +281,29 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
     
     public void crear_Datos()
     {   
-        Cuenta cuenta1 = new Cuenta(1, 1234, 1000, 5678);
-        Cuenta cuenta2 = new Cuenta(2, 4321, 500, 9876);
-        Cuenta cuenta3 = new Cuenta(3, 5678, 1500, 8765);
         
+        
+        
+        Tarjeta tarjetac1 = new Tarjeta_Credito(123456789, 1000, "12/25", 123, 5000);
+        Tarjeta tarjetac2 = new Tarjeta_Credito(987654321, 500, "10/24", 456, 3000);
+        Tarjeta tarjetac3 = new Tarjeta_Credito(567890123, 200, "08/23", 789, 2000);
+        
+        Cuenta cuenta1 = new Cuenta(1, 1234, 1000);
+        Cuenta cuenta2 = new Cuenta(2, 4321, 500);
+        Cuenta cuenta3 = new Cuenta(3, 5678, 1500);
+        
+        Tarjeta_Debito tarjetad4 = new Tarjeta_Debito(135792468, cuenta1.getSaldo(), "11/26", 234);
+        Tarjeta_Debito tarjetad5 = new Tarjeta_Debito(908876904, cuenta2.getSaldo(), "10/25", 456);
+        Tarjeta_Debito tarjetad6 = new Tarjeta_Debito(345658542, cuenta3.getSaldo(), "09/24", 789);
+        
+        cuenta1.setTarjetas(tarjetac1);
+        cuenta2.setTarjetas(tarjetac2);
+        cuenta3.setTarjetas(tarjetac3);
+        
+        cuenta1.setTarjeta_debito(tarjetad4);
+        cuenta2.setTarjeta_debito(tarjetad5);
+        cuenta3.setTarjeta_debito(tarjetad6);
+                
         Cuenta[] cuentaA = {cuenta1, cuenta2};
         Cuenta[] cuentaB = {cuenta3};
         
