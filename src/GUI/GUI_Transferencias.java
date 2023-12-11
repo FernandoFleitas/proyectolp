@@ -220,9 +220,9 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
             
             //Creamos el comprobante
             Comprobante comprobante_final = new Comprobante();
-            comprobante_final.set_monto(monto);
+            comprobante_final.set_monto(-monto);
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
-            comprobante_final.set_descripcion("Transferencia " +cliente_destino.get_nombre()+" Cuenta "+cuenta_destino.getID());
+            comprobante_final.set_descripcion(cliente_destino.get_nombre()+" Cuenta "+cuenta_destino.getID());
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
             
@@ -230,7 +230,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
             Comprobante comprobante_final2 = new Comprobante();
             comprobante_final2.set_monto(monto);
             comprobante_final2.set_id(cuenta_destino.getMovimientos().size()+1);
-            comprobante_final2.set_descripcion("D   "+cliente_final.get_nombre()+" "+cuenta_final.getID());
+            comprobante_final2.set_descripcion(cliente_final.get_nombre()+" Cuenta "+" "+cuenta_final.getID());
             //Agrega el comprobante en el historial de la cuenta
             cuenta_destino.setMovimientos(comprobante_final2);
         }
