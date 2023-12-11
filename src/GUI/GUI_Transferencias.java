@@ -246,6 +246,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
             comprobante_final.set_monto(-monto);
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
             comprobante_final.set_descripcion(cliente_destino.get_nombre()+" Cuenta "+cuenta_destino.getID());
+            comprobante_final.imprimir();
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
             

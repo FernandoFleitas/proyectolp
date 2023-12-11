@@ -290,6 +290,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
             comprobante_final.set_monto(-pagos[index].getMonto());
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
             comprobante_final.set_descripcion("Pago de "+ servicios[index].getNombre());
+            comprobante_final.imprimir();
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
         }
@@ -301,6 +302,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
             comprobante_final.set_monto(-pagos[index].getMonto());
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
             comprobante_final.set_descripcion("Pago de "+ servicios[index].getNombre() + "  (TC)");
+            comprobante_final.imprimir();
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
         }

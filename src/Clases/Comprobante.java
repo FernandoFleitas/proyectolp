@@ -1,4 +1,7 @@
 package Clases;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  * La clase `Comprobante` representa un comprobante de transacción en el sistema bancario.
@@ -23,7 +26,15 @@ public class Comprobante {
     private int ID_Transaccion;
     private int monto;
     private String descripcion;
+    private String fecha;
 
+    public Comprobante(){
+        // Obtiene la fecha y hora actuales
+        LocalDateTime ahora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String fechaHoraActual = ahora.format(formatter);
+        this.fecha = fechaHoraActual;
+    }
     /**
      * Establece el ID de la transacción.
      *
@@ -31,6 +42,10 @@ public class Comprobante {
      */
     public void set_id(int id) {
         this.ID_Transaccion = id;
+    }
+    
+    public String getFecha(){
+        return fecha;
     }
 
     /**
@@ -76,5 +91,11 @@ public class Comprobante {
      */
     public String get_descripcion() {
         return descripcion;
+    }
+     
+    public void imprimir(){
+        // Muestra los datos y la fecha/hora en un JOptionPane
+        String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto+ "\nFecha y Hora: " + fecha;
+        JOptionPane.showMessageDialog( null, mensaje, "Comprobante", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -84,9 +84,11 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
     
     public void agregarMovimientos() {
     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-
+    
+    
     for (Comprobante comprobante : cuenta_final.getMovimientos()) {
-        Object[] row = {comprobante.get_descripcion(), comprobante.get_monto() + " Gs"};
+        Object[] row = {comprobante.get_descripcion(), comprobante.get_monto() + " Gs", comprobante.getFecha()};
+        
         model.addRow(row);
     }
 
@@ -103,14 +105,11 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
                     // Obtiene los datos de la fila seleccionada
                     String descripcion = jTable2.getValueAt(fila, 0).toString();
                     String monto = jTable2.getValueAt(fila, 1).toString();
+                    String fecha = jTable2.getValueAt(fila, 2).toString();
 
-                    // Obtiene la fecha y hora actuales
-                    LocalDateTime ahora = LocalDateTime.now();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                    String fechaHoraActual = ahora.format(formatter);
-
+                    
                     // Muestra los datos y la fecha/hora en un JOptionPane
-                    String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto+ "\nFecha y Hora: " + fechaHoraActual;
+                    String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto+ "\nFecha y Hora: " + fecha;
                     JOptionPane.showMessageDialog(GUI_Estado_Cuenta.this, mensaje, "Comprobante", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -153,11 +152,11 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Conceptos", "Monto"
+                "Conceptos", "Monto", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -168,6 +167,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
