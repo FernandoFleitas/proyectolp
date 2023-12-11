@@ -3,14 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 package GUI;
+import Hilos.Hilo_Transferencia;
+import Hilos.Hilo_Estado_Cuenta;
+import Hilos.Hilo_Pago_Tarjeta;
+import Hilos.Hilo_Pago_Servicio;
 import Clases.Cliente;
 import Clases.Cuenta;
-import Hilos.Hilo_Transferencia;
-import Clases.Individuo;
-import Clases.Empresa; 
 import Clases.Pago;
 import Clases.Servicio;
 import Clases.Tarjeta_Credito;
+
 
 /**
  * La clase `GUI_Ventana_Principal` representa la interfaz gráfica de la ventana principal del sistema bancario.
@@ -47,7 +49,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
      */
     private Cliente[] clientes;
     private GUI_Estado_Cuenta MenuEstadoCuenta = new GUI_Estado_Cuenta();
-    private GUI_Pago_Servicios MenuPagoServicios = new GUI_Pago_Servicios();
+    
     private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
     private GUI_Transferencias MenuTransferencias; 
     private Tarjeta_Credito [] tarjetas;
@@ -191,13 +193,8 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        GUI_Estado_Cuenta menu_Estado = new GUI_Estado_Cuenta();
-        menu_Estado.setVisible(true);
-        menu_Estado.set_Datos(clientes,cliente_final,cuenta_final);
-        menu_Estado.set_Usuario_Cuenta_Tarjeta_Saldo();
-        menu_Estado.agregarMovimientos();
-        menu_Estado.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+        Hilo_Estado_Cuenta hilo_estado_cuenta = new Hilo_Estado_Cuenta(clientes,cliente_final,cuenta_final);
+        hilo_estado_cuenta.start();
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -209,18 +206,16 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        GUI_Pago_Servicios menu_Servicios = new GUI_Pago_Servicios();
-        menu_Servicios.setVisible(true);
-        menu_Servicios.InicializarTodo(arrayPagos, arrayServicios, cuenta_final, cliente_final, tarjetas, this);
-        menu_Servicios.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Hilo_Pago_Servicio hilo_pago_servicio = new Hilo_Pago_Servicio(arrayPagos,arrayServicios,cuenta_final,cliente_final,tarjetas,this);
+        hilo_pago_servicio.start();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        GUI_Pago_Tarjetas menu_Tarjetas = new GUI_Pago_Tarjetas();
-        menu_Tarjetas.setVisible(true);
-        menu_Tarjetas.InicializarPagoTarjetas(tarjetas, cuenta_final, this);
-        menu_Tarjetas.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Hilo_Pago_Tarjeta hilo_pago_tarjeta = new Hilo_Pago_Tarjeta(tarjetas,cuenta_final,this);
+        hilo_pago_tarjeta.start();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void MenuCerradoSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuCerradoSesionMouseClicked

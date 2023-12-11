@@ -172,7 +172,6 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame implements Interfaz{
             int MontoAPagar = parseInt(jTextField2.getText().replace(" ", ""));
             
             for (Tarjeta_Credito tarjeta : tarjetas){
-                System.out.println(tarjeta.getN_Tarjeta());
                 if (tarjeta.getN_Tarjeta() == Num_validar) {
                     validarTarjeta = true;
                     tarjetaApagar = tarjeta;
@@ -182,8 +181,14 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame implements Interfaz{
             }
             if (validarTarjeta) {
                 if (tarjetaApagar.getSaldo()*0.1 > MontoAPagar) {
-                jLabel4.setText("Tu pago mínimo es " + tarjetaApagar.getSaldo()*0.1);
-                return;
+                    jLabel4.setText("Tu pago mínimo es " + tarjetaApagar.getSaldo()*0.1 + " Gs");
+                    jTextField2.setText("");
+                    return;
+                }
+                else if (cuenta_final.getSaldo()< MontoAPagar){
+                    jLabel4.setText(" Saldo insuficiente ");
+                    jTextField2.setText("");
+                    return;
                 }
                 else if (tarjetaApagar.getSaldo() > 0){
                     GUI_Pin_Transaccion menu_validar = new GUI_Pin_Transaccion();

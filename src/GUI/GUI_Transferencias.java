@@ -32,7 +32,7 @@ import java.awt.Dialog;
  *   <li>{@code validar_inputs()} - Valida los datos ingresados para la transferencia.</li>
  * </ul>
  * 
- * @author jose
+ * @author joser
  */
 public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
     
