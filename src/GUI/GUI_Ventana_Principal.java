@@ -7,6 +7,7 @@ import Hilos.Hilo_Transferencia;
 import Hilos.Hilo_Estado_Cuenta;
 import Hilos.Hilo_Pago_Tarjeta;
 import Hilos.Hilo_Pago_Servicio;
+import Hilos.Hilo_Deposito;
 import Clases.Cliente;
 import Clases.Cuenta;
 import Clases.Pago;
@@ -84,6 +85,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         helpMenu = new javax.swing.JMenu();
         MenuCerradoSesion = new javax.swing.JMenu();
@@ -129,6 +131,14 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Cuenta:-----------");
 
+        jButton5.setText("Deposito");
+        jButton5.setActionCommand("Deposito");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
         menuBar.add(helpMenu);
@@ -157,12 +167,12 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -180,7 +190,9 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -222,6 +234,17 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
          Menu_Inicio.setVisible(true);
          cerrar();
     }//GEN-LAST:event_MenuCerradoSesionMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        menu_deposito();
+    }//GEN-LAST:event_jButton5ActionPerformed
+    
+    public void menu_deposito(){
+        Hilo_Deposito menu_deposito = new Hilo_Deposito(cuenta_final);
+        menu_deposito.run();
+        set_Usuario_Saldo();
+    }
     
     public void set_Usuario_Saldo()
     {
@@ -279,6 +302,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
                 new GUI_Ventana_Principal().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,6 +312,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar menuBar;
