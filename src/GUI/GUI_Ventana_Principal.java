@@ -133,7 +133,6 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton5.setText("Deposito");
-        jButton5.setActionCommand("Deposito");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -142,6 +141,11 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
 
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
+            }
+        });
         menuBar.add(helpMenu);
 
         MenuCerradoSesion.setMnemonic('h');
@@ -240,6 +244,13 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         // TODO add your handling code here:
         menu_deposito();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
+        // TODO add your handling code here:
+        GUI_Ayuda Menu_Ayuda = new GUI_Ayuda(); 
+        Menu_Ayuda.setVisible(true);
+        Menu_Ayuda.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_helpMenuMouseClicked
     
     public void menu_deposito(){
         Hilo_Deposito menu_deposito = new Hilo_Deposito(cuenta_final);

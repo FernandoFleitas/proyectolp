@@ -96,6 +96,8 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
         jLabel7 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        menuBar = new javax.swing.JMenuBar();
+        helpMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +156,17 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText(" ");
 
+        helpMenu.setMnemonic('h');
+        helpMenu.setText("Help");
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(helpMenu);
+
+        setJMenuBar(menuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +210,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,6 +347,13 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
         cerrar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
+        // TODO add your handling code here:
+        GUI_Ayuda Menu_Ayuda = new GUI_Ayuda();
+        Menu_Ayuda.setVisible(true);
+        Menu_Ayuda.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_helpMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -371,6 +391,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -384,5 +405,6 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }

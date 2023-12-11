@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Hilos;
 
 import Clases.Cuenta;
-import java.util.Scanner;
 import Clases.Comprobante;
+import javax.swing.JOptionPane;
 
 /**
  * Esta clase representa un hilo para realizar operaciones de depósito en una cuenta.
@@ -37,33 +33,34 @@ public class Hilo_Deposito extends Thread {
      */
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-
         // Crea un menú externo a la app para realizar depósitos
-        System.out.println("Ingrese Monto a depositar:");
+        String inputMonto = JOptionPane.showInputDialog(null, "Ingrese Monto a depositar:", "Comprobante", JOptionPane.PLAIN_MESSAGE);
 
-        // Verifica si la entrada es un entero positivo
-        while (!scanner.hasNextInt()) {
-            System.out.println("Por favor, ingrese un número entero positivo válido.");
-            scanner.next(); // Limpiar el búfer de entrada
+        // Verificar si el usuario ha cancelado la operación
+        if (inputMonto == null) {
+            return; // Salir del método si se ha cancelado la operación
         }
 
-        int monto = scanner.nextInt();
+        try {
+            int monto = Integer.parseInt(inputMonto);
 
-        if (monto > 0) {
-            cuenta_final.setSaldo(cuenta_final.getSaldo() + monto);
-            System.out.println("Depósito exitoso: Gs" + monto);
+            if (monto > 0) {
+                cuenta_final.setSaldo(cuenta_final.getSaldo() + monto);
 
-            // Crear un comprobante de depósito
-            Comprobante comprobante = new Comprobante();
-            comprobante.set_id(cuenta_final.getMovimientos().size() + 1);
-            comprobante.set_descripcion("Deposito");
-            comprobante.set_monto(monto);
+                // Crear un comprobante de depósito
+                Comprobante comprobante = new Comprobante();
+                comprobante.set_id(cuenta_final.getMovimientos().size() + 1);
+                comprobante.set_descripcion("Deposito");
+                comprobante.set_monto(monto);
+                comprobante.imprimir();
 
-            // Agregar el comprobante a la lista de movimientos de la cuenta
-            cuenta_final.setMovimientos(comprobante);
-        } else {
-            System.out.println("Por favor, ingrese un número entero positivo válido.");
+                // Agregar el comprobante a la lista de movimientos de la cuenta
+                cuenta_final.setMovimientos(comprobante);
+            } else if (monto < -1) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número entero positivo válido.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número entero válido.");
         }
     }
 }

@@ -83,6 +83,8 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
+        menuBar = new javax.swing.JMenuBar();
+        helpMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +144,17 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
 
         jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Continental", "Banco Basa", "Itau", "Santander" }));
+
+        helpMenu.setMnemonic('h');
+        helpMenu.setText("Help");
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(helpMenu);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +221,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -311,6 +324,13 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
         cerrar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
+        // TODO add your handling code here:
+        GUI_Ayuda Menu_Ayuda = new GUI_Ayuda();
+        Menu_Ayuda.setVisible(true);
+        Menu_Ayuda.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_helpMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -348,6 +368,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -361,5 +382,6 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }
