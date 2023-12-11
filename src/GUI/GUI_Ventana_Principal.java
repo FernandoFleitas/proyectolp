@@ -48,10 +48,6 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
      * Creates new form NewApplication
      */
     private Cliente[] clientes;
-    private GUI_Estado_Cuenta MenuEstadoCuenta = new GUI_Estado_Cuenta();
-    
-    private GUI_Pago_Tarjetas MenuPagoTarjetas = new GUI_Pago_Tarjetas();
-    private GUI_Transferencias MenuTransferencias; 
     private Tarjeta_Credito [] tarjetas;
     private Cliente cliente_final;
     private Cuenta cuenta_final; 
