@@ -240,7 +240,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
                 return;
             }
             else if (cuenta_final.getSaldo() < pagos[index].getMonto()) {
-                jLabel8.setText("No tenes saldo, seco");
+                jLabel8.setText("Saldo insuficiente");
                 return;
             }
             else{
@@ -264,7 +264,7 @@ public class GUI_Pago_Servicios extends javax.swing.JFrame implements Interfaz{
                 return;
             }
             else if (pagos[index].getMonto() > cuenta_final.getTarjetas().get(index2).getLimiteCredito()){
-                jLabel8.setText("No te alcanza el crédito papi");
+                jLabel8.setText("Saldo insuficiente");
                 return;
             }
             else{
