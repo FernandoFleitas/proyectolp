@@ -175,7 +175,6 @@ public class GUI_Pago_Tarjetas extends javax.swing.JFrame implements Interfaz{
                 if (tarjeta.getN_Tarjeta() == Num_validar) {
                     validarTarjeta = true;
                     tarjetaApagar = tarjeta;
-                    System.out.println();
                     break;
                 }
             }

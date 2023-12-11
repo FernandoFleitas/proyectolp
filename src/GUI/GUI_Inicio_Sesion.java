@@ -212,7 +212,6 @@ public class GUI_Inicio_Sesion extends javax.swing.JFrame implements Interfaz{
         validarPin();
         if(validador)
         {   
-            System.out.println(tarjetas[0].getN_Tarjeta());
             menu_principal.set_Datos(clientes,cliente_final,cuenta_final, tarjetas);
             menu_principal.set_Usuario_Saldo();
             menu_principal.setVisible(true);
