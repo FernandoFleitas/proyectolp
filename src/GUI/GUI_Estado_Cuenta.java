@@ -86,7 +86,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
 
     for (Comprobante comprobante : cuenta_final.getMovimientos()) {
-        Object[] row = {comprobante.get_descripcion(), comprobante.get_monto()};
+        Object[] row = {comprobante.get_descripcion(), comprobante.get_monto() + " Gs"};
         model.addRow(row);
     }
 
@@ -110,7 +110,7 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
                     String fechaHoraActual = ahora.format(formatter);
 
                     // Muestra los datos y la fecha/hora en un JOptionPane
-                    String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto + "\nFecha y Hora: " + fechaHoraActual;
+                    String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto+ "\nFecha y Hora: " + fechaHoraActual;
                     JOptionPane.showMessageDialog(GUI_Estado_Cuenta.this, mensaje, "Comprobante", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
