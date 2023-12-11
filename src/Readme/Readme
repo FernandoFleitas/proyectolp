@@ -10,3 +10,11 @@ Empresa:
            6632458
            Pin:6632458
            cuenta : 3, PT = 5678
+
+Tarjetas de credito:
+        Tarjeta_Credito tarjetac1 = new Tarjeta_Credito(nro_trajeta, saldo, fecha_vencimiento, cvc, limite_credito);
+        Tarjeta_Credito tarjetac1 = new Tarjeta_Credito(123456789, 2000, "12/25", 123, 5000);
+        Tarjeta_Credito tarjetac2 = new Tarjeta_Credito(987654321, 1000, "10/24", 456, 3000);
+        Tarjeta_Credito tarjetac3 = new Tarjeta_Credito(567890123, 2000, "08/23", 789, 2000);
+        
+            
