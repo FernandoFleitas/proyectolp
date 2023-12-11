@@ -6,8 +6,7 @@ package GUI;
 import Clases.Cliente;
 import Clases.Cuenta;
 import Clases.Individuo;
-import Clases.Empresa; 
-import Clases.Tarjeta;
+import Clases.Empresa;
 import Clases.Tarjeta_Credito;
 import Clases.Tarjeta_Debito;
 
