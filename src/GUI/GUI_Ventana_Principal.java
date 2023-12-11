@@ -131,6 +131,7 @@ public class GUI_Ventana_Principal extends javax.swing.JFrame implements Interfa
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Cuenta:-----------");
 
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton5.setText("Deposito");
         jButton5.setActionCommand("Deposito");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
