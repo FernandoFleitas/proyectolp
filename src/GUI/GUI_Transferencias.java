@@ -222,7 +222,7 @@ public class GUI_Transferencias extends javax.swing.JFrame implements Interfaz{
             Comprobante comprobante_final = new Comprobante();
             comprobante_final.set_monto(monto);
             comprobante_final.set_id(cuenta_final.getMovimientos().size()+1);
-            comprobante_final.set_descripcion("T    "+cliente_destino.get_nombre()+" "+cuenta_destino.getID());
+            comprobante_final.set_descripcion("Transferencia " +cliente_destino.get_nombre()+" Cuenta "+cuenta_destino.getID());
             //Agrega el comprobante en el historial de la cuenta
             cuenta_final.setMovimientos(comprobante_final);
             

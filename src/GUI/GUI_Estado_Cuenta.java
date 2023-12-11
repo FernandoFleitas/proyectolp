@@ -3,10 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import Clases.Cliente;
 import Clases.Comprobante;
 import Clases.Cuenta;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -79,14 +83,40 @@ public class GUI_Estado_Cuenta extends javax.swing.JFrame {
     }
     
     public void agregarMovimientos() {
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
 
-        
-        for (Comprobante comprobante : cuenta_final.getMovimientos()) {
-            Object[] row = {comprobante.get_descripcion(), comprobante.get_monto()};
-            model.addRow(row);
-        }
+    for (Comprobante comprobante : cuenta_final.getMovimientos()) {
+        Object[] row = {comprobante.get_descripcion(), comprobante.get_monto()};
+        model.addRow(row);
     }
+
+    // Agrega el evento del mouse a la tabla
+    jTable2.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 1) {
+                // Obtiene la fila y columna donde se hizo clic
+                int fila = jTable2.getSelectedRow();
+                int columna = jTable2.getSelectedColumn();
+
+                // Verifica si se hizo clic en una celda válida
+                if (fila != -1 && columna != -1) {
+                    // Obtiene los datos de la fila seleccionada
+                    String descripcion = jTable2.getValueAt(fila, 0).toString();
+                    String monto = jTable2.getValueAt(fila, 1).toString();
+
+                    // Obtiene la fecha y hora actuales
+                    LocalDateTime ahora = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                    String fechaHoraActual = ahora.format(formatter);
+
+                    // Muestra los datos y la fecha/hora en un JOptionPane
+                    String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto + "\nFecha y Hora: " + fechaHoraActual;
+                    JOptionPane.showMessageDialog(GUI_Estado_Cuenta.this, mensaje, "Comprobante", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    });
+}
     /**
      * Este método es llamado desde el constructor para inicializar la forma.
      * ADVERTENCIA: No modifique este código. El contenido de este método siempre se regenera mediante el editor de formularios.
