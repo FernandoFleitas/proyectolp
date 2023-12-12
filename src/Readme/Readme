@@ -1,20 +1,38 @@
 Individuo:
            Elias Figueredo
-           5.438.724
+           CI: 5438724
            Pin: 5438724
-           Cuenta 1: 1, PT = 1234
-           Cuenta 2: 2, PT = 4321
+           Cuenta 1: 1
+           Pin Transaccion = 1234
+           Tarjeta de credito: 
+                              Nro:123456789
+                              saldo:2000
+                              vencimiento:12/25
+                              cvc:123
+                              limite_credito:5000
+
+           Cuenta 2: 2 
+           Pin Transaccion = 4321
+           Tarjeta de credito: 
+                              Nro:987654321
+                              saldo:1000
+                              vencimiento:10/24
+                              cvc:456
+                              limite_credito:3000
 
 Empresa:
            Capiateña SA
-           6632458
+           CI: 6632458
            Pin:6632458
-           cuenta : 3, PT = 5678
+           cuenta : 3
+           Pin Transaccion = 5678
+           Tarjeta de credito: 
+                              Nro:567890123
+                              saldo:2000
+                              vencimiento:08/23
+                              cvc:789
+                              limite_credito:2000
 
-Tarjetas de credito:
-        Tarjeta_Credito tarjetac1 = new Tarjeta_Credito(nro_trajeta, saldo, fecha_vencimiento, cvc, limite_credito);
-        Tarjeta_Credito tarjetac1 = new Tarjeta_Credito(123456789, 2000, "12/25", 123, 5000);
-        Tarjeta_Credito tarjetac2 = new Tarjeta_Credito(987654321, 1000, "10/24", 456, 3000);
-        Tarjeta_Credito tarjetac3 = new Tarjeta_Credito(567890123, 2000, "08/23", 789, 2000);
+
         
             
