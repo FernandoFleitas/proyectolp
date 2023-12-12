@@ -169,7 +169,7 @@ public class GUI_Ayuda extends javax.swing.JFrame {
     private void VerDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerDocumentosActionPerformed
         // TODO add your handling code here:
         ClaseHilo1 hilo1 = new ClaseHilo1(this);
-        ClaseHilo2 hilo2 = new ClaseHilo2("dist\\javadoc\\index.html");
+        ClaseHilo2 hilo2 = new ClaseHilo2("javadoc\\index.html");
         hilo1.start();
         hilo2.start();
         
