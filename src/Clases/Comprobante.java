@@ -17,6 +17,21 @@ import javax.swing.JOptionPane;
  *   <li>{@code get_id()} - Obtiene el ID de la transacción.</li>
  *   <li>{@code get_monto()} - Obtiene el monto de la transacción.</li>
  *   <li>{@code get_descripcion()} - Obtiene la descripción de la transacción.</li>
+ *   <li>{@code getFecha()} - Obtiene la fecha y hora de la transacción.</li>
+ *   <li>{@code imprimir()} - Muestra los detalles de la transacción en un JOptionPane.</li>
+ * </ul>
+ * 
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code ID_Transaccion} - El ID de la transacción.</li>
+ *   <li>{@code monto} - El monto de la transacción.</li>
+ *   <li>{@code descripcion} - La descripción de la transacción.</li>
+ *   <li>{@code fecha} - La fecha y hora de la transacción.</li>
+ * </ul>
+ * 
+ * <p><strong>Constructor:</strong></p>
+ * <ul>
+ *   <li>{@code Comprobante()} - Crea una instancia de la clase con la fecha y hora actuales.</li>
  * </ul>
  * 
  * @author Hola
@@ -28,6 +43,9 @@ public class Comprobante {
     private String descripcion;
     private String fecha;
 
+    /**
+     * Constructor que inicializa la fecha y hora actuales.
+     */
     public Comprobante(){
         // Obtiene la fecha y hora actuales
         LocalDateTime ahora = LocalDateTime.now();
@@ -35,6 +53,7 @@ public class Comprobante {
         String fechaHoraActual = ahora.format(formatter);
         this.fecha = fechaHoraActual;
     }
+    
     /**
      * Establece el ID de la transacción.
      *
@@ -44,6 +63,11 @@ public class Comprobante {
         this.ID_Transaccion = id;
     }
     
+    /**
+     * Obtiene la fecha y hora de la transacción.
+     *
+     * @return La fecha y hora de la transacción.
+     */
     public String getFecha(){
         return fecha;
     }
@@ -93,6 +117,9 @@ public class Comprobante {
         return descripcion;
     }
      
+    /**
+     * Muestra los datos de la transacción en un JOptionPane.
+     */
     public void imprimir(){
         // Muestra los datos y la fecha/hora en un JOptionPane
         String mensaje = "Descripción: " + descripcion + "\nMonto: " + monto+ "\nFecha y Hora: " + fecha;

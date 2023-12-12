@@ -4,18 +4,15 @@
  */
 package GUI;
 import javax.swing.JOptionPane;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import Clases.Cliente;
 import Clases.Comprobante;
 import Clases.Cuenta;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * La clase GUI_Estado_Cuenta representa la interfaz gráfica para mostrar el estado de cuenta de un cliente.
+ * La clase `GUI_Estado_Cuenta` representa la interfaz gráfica para mostrar el estado de cuenta de un cliente.
  * Permite visualizar información sobre el usuario, cuenta, tarjeta, saldo y movimientos.
  * 
  * <p>La clase utiliza la biblioteca Swing para la construcción de la interfaz gráfica y trabaja con objetos de las clases

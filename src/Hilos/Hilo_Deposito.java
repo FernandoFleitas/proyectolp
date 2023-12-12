@@ -9,6 +9,20 @@ import javax.swing.JOptionPane;
  * El hilo solicita al usuario ingresar un monto a depositar y realiza la operación
  * si el monto ingresado es un número entero positivo.
  *
+ * <p><strong>Atributos:</strong></p>
+ * <ul>
+ *   <li>{@code cuenta_final} - La cuenta en la que se realizará el depósito.</li>
+ * </ul>
+ *
+ * <p><strong>Métodos:</strong></p>
+ * <ul>
+ *   <li>{@code Hilo_Deposito(Cuenta cuenta_final)} - Constructor que inicializa el hilo con la cuenta especificada.</li>
+ *   <li>{@code run()} - Método que se ejecuta cuando el hilo es iniciado. Solicita al usuario ingresar
+ *     un monto a depositar y realiza la operación si el monto es un número entero positivo.</li>
+ * </ul>
+ *
+ * <p>Esta clase trabaja en conjunto con las clases {@link Clases.Cuenta} y {@link Clases.Comprobante}.</p>
+ *
  * @author joser
  */
 public class Hilo_Deposito extends Thread {
